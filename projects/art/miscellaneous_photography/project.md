@@ -1,0 +1,37 @@
+---
+title: "Miscellaneous Photography"
+date: 2012
+description: "A collection of photographic works including gelatin silver prints and digital prints."
+thumbnail: "Diego4rma_gmail_Cayuga_1_thumb.jpg"
+images:
+  - file: "Diego4rma_gmail_Cayuga_1.jpg"
+    thumb: "Diego4rma_gmail_Cayuga_1_thumb.jpg"
+    title: "Cayuga 1"
+    caption: "2009 / 8.5 x 8.5 in / gelatin silver print"
+  - file: "Diego4rma_gmail_Cayuga_2.jpg"
+    thumb: "Diego4rma_gmail_Cayuga_2_thumb.jpg"
+    title: "Cayuga 2"
+    caption: "2009 / 8.5 x 8.5 in / gelatin silver print"
+  - file: "Diego4rma_gmail_Cayuga_3.jpg"
+    thumb: "Diego4rma_gmail_Cayuga_3_thumb.jpg"
+    title: "Cayuga 3"
+    caption: "2009 / 8.5 x 8.5 in / gelatin silver print"
+  - file: "Diego4rma_gmail_Pater.jpg"
+    thumb: "Diego4rma_gmail_Pater_thumb.jpg"
+    title: "Pater"
+    caption: "2012 / 11 x 14 in / digital print"
+  - file: "Diego4rma_gmail_Mater.jpg"
+    thumb: "Diego4rma_gmail_Mater_thumb.jpg"
+    title: "Mater"
+    caption: "2012 / 11 x 14 in / digital print"
+  - file: "Diego4rma_gmail_Triunfo.jpg"
+    thumb: "Diego4rma_gmail_Triunfo_thumb.jpg"
+    title: "Triunfo"
+    caption: "2012 / 11 x 14 in / digital print"
+  - file: "Diego4rma_gmail_Sage.jpg"
+    thumb: "Diego4rma_gmail_Sage_thumb.jpg"
+    title: "Sage"
+    caption: "2012 / 8.5 x 11 in / gelatin silver print"
+---
+
+A collection of photographic works spanning various subjects and techniques.
