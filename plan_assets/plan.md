@@ -30,6 +30,7 @@ The front page of the website will display ASCII objects animated as point masse
 * All objects will change in color as the background changes to make sure they are visible. The objects will be lighter colored at night (to look like celestial objects) and darker in the daytime (darker objects against a lighter background).
 * When the mouse hovers over an item moving around (thus "catching" it) the object will stop and display an icon to represent the project. Clicking on the object will open up a gallery to display the object.
 * **Mobile interaction**: On touch devices, users tap an object to "catch" it (same behavior as hover on desktop).
+* **Artist name on mobile**: The name "DIEGO ARMANDO PLASCENCIA VEGA" must always display stacked as two lines (`DIEGO ARMANDO` / `PLASCENCIA VEGA`), matching the desktop layout. On mobile the name container is constrained to a `max-width` that forces this wrap.
 * There will still be a "menu" like the current design which shows three options:
 
                                 {CATEGORY_1} / {CATEGORY_2} / ... / ABOUT
@@ -37,7 +38,8 @@ The front page of the website will display ASCII objects animated as point masse
     * The menu is generated dynamically from the category folder names under `/projects/`, plus a fixed ABOUT link. No categories are hard-coded.
     * The menu will be displayed on the top right of the page
     * Clicking the about page will simply transition you to the "about" page with information about me (similar to the current about page)
-    * Clicking a category tab will result in only the corresponding objects fading away and lining up in chronological order leading you to a "gallery" in which you can view the different projects (similarly to how the website works now).
+    * **Desktop**: Clicking a category tab will result in only the corresponding objects fading away and lining up in chronological order leading you to a "gallery" in which you can view the different projects (similarly to how the website works now). The accordion menu remains as-is.
+    * **Mobile**: Instead of the accordion, the menu displays simple links to dedicated **category gallery pages** (one per category, e.g. `gallery_art.html`, `gallery_tech.html`). Each gallery page shows all projects in that category as a responsive thumbnail grid sorted chronologically. This avoids the accordion pushing content off-screen on small devices.
 
 ## Accessibility
 * The dynamically generated category menu (plus ABOUT) will always be visible and fully keyboard-navigable
@@ -104,10 +106,19 @@ The creation of the new website should happen in the following steps, stopping a
 - [x] Migrate all 11 projects (8 art, 3 tech) to markdown + colocated images
 - [x] Remove hard-coded categories — generator discovers categories dynamically from folder names
 
-## Phase 2: Mobile Responsiveness
-- [ ] Audit current CSS for mobile breakpoints
-- [ ] Implement responsive layout for menu and content areas
-- [ ] Test on iPhone and various screen sizes
+## Phase 2: Mobile Responsiveness ✅
+- [x] Audit current CSS for mobile breakpoints
+- [x] Add viewport meta tag to template and standalone pages (about.html, index.html)
+- [x] Implement responsive media queries (≤768px breakpoint) for menu, content, galleria, about page
+- [ ] Test on iPhone and various screen sizes (manual testing needed)
+
+## Phase 2b: Mobile Navigation Improvements
+- [ ] Fix artist name stacking: constrain `#ARTIST_NAME` `max-width` in the mobile media query so "DIEGO ARMANDO / PLASCENCIA VEGA" always wraps to two lines
+- [ ] Create a `gallery` HTML template for category gallery pages (responsive thumbnail grid, sorted by date)
+- [ ] Update `generate_site.py` to generate one gallery page per category (e.g. `gallery_art.html`, `gallery_tech.html`)
+- [ ] On mobile (≤768px), replace the accordion menu with simple links to the category gallery pages (plus About)
+- [ ] Keep accordion behavior unchanged on desktop
+- [ ] Test gallery pages on mobile and desktop
 
 ## Phase 3: Front Page Animation
 Build in layers, testing each before moving to the next:
