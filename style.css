@@ -131,6 +131,41 @@ overflow: visible;
 
 	display:none;
 }
+/* Project body (article content below gallery) */
+#project_body:empty {
+	display: none;
+}
+#project_body {
+	position: relative;
+	top: 580px;
+	color: rgb(150, 150, 150);
+	font-family: "helvetica";
+	font-size: 10pt;
+	line-height: 1.6;
+	max-width: 730px;
+	left: 5%;
+	padding-bottom: 600px;
+}
+#project_body h1, #project_body h2, #project_body h3 {
+	color: rgb(120, 120, 120);
+}
+#project_body code {
+	background: rgba(150, 150, 150, 0.1);
+	padding: 1px 4px;
+}
+#project_body table {
+	border-collapse: collapse;
+	margin: 10px 0;
+}
+#project_body th, #project_body td {
+	border: 1px solid rgb(100, 100, 100);
+	padding: 5px 10px;
+	text-align: left;
+}
+#project_body img {
+	max-width: 100%;
+	height: auto;
+}
 /* Table containing Group Exhibits */
 #content table{
 	color: rgb(150, 150, 150);
@@ -167,5 +202,171 @@ a:active {
 	width:80%;
 	top:10%;
 	left:10%;
+}
 
+/* Mobile nav links (hidden on desktop, shown on mobile) */
+#mobile_nav {
+	display: none;
+	color: rgb(150, 150, 150);
+	font-family: "helvetica";
+	font-size: 10pt;
+	font-weight: bold;
+}
+#mobile_nav a {
+	display: inline;
+	margin-right: 10px;
+}
+
+/* ---- Gallery Page ---- */
+#gallery_page {
+	padding: 20px 0;
+}
+.gallery_heading {
+	color: rgb(120, 120, 120);
+	font-family: "helvetica";
+	font-weight: bold;
+	font-size: 14pt;
+	margin-bottom: 20px;
+}
+.gallery_grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 20px;
+}
+.gallery_item {
+	text-align: center;
+}
+.gallery_item a {
+	display: block;
+}
+.gallery_item img {
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+}
+.gallery_item .gallery_item_title {
+	color: rgb(150, 150, 150);
+	font-family: "helvetica";
+	font-size: 9pt;
+	margin-top: 5px;
+}
+.gallery_item .gallery_item_date {
+	color: rgb(180, 180, 180);
+	font-family: "helvetica";
+	font-size: 8pt;
+}
+
+/* ---- Mobile Responsive ---- */
+@media screen and (max-width: 768px) {
+	/* Menu: switch from fixed sidebar to top of page */
+	#menu {
+		position: relative;
+		width: 100%;
+		bottom: auto;
+		left: auto;
+		margin: 10px 0;
+		padding: 0 10px;
+		box-sizing: border-box;
+	}
+
+	/* Artist name: relative position, centered, constrained width to force two-line wrap */
+	#ARTIST_NAME {
+		position: relative;
+		width: 100%;
+		max-width: 200px;
+		left: auto;
+		bottom: auto;
+		text-align: center;
+		padding: 10px 0;
+		margin: 0 auto;
+	}
+
+	/* Content: full width, no left offset */
+	#content {
+		position: relative;
+		width: 100%;
+		height: auto;
+		left: auto;
+		top: auto;
+		margin: 0;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+
+	/* Galleria: responsive width and height */
+	#galleria {
+		position: relative;
+		width: 100%;
+		height: 300px;
+		top: auto;
+		left: auto;
+	}
+
+	/* About page: stack vertically */
+	#about {
+		position: relative;
+		left: auto;
+		top: auto;
+		padding: 10px;
+	}
+
+	#portrait {
+		width: 200px;
+		height: 200px;
+		margin: 0 auto;
+		display: block;
+	}
+
+	#portrait img {
+		width: 100%;
+		height: auto;
+	}
+
+	#about_me {
+		position: relative;
+		top: auto;
+		left: auto;
+		width: 100%;
+		padding: 10px 0;
+	}
+
+	#education_work {
+		width: 100%;
+	}
+
+	#caption_container {
+		position: relative;
+		left: auto;
+		right: auto;
+		padding: 5px 0;
+	}
+
+	#project_body {
+		position: relative;
+		top: auto;
+		left: auto;
+		margin-top: 60px;
+		padding-bottom: 20px;
+	}
+
+	/* Table scroll on small screens */
+	#content table {
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+
+	/* Hide accordion on mobile, show mobile nav links */
+	#Artwork_Accordion {
+		display: none;
+	}
+	#mobile_nav {
+		display: block;
+	}
+
+	/* Gallery grid: 2 columns on mobile */
+	.gallery_grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
 }
