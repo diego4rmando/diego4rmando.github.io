@@ -26,6 +26,7 @@ DIEGO ARMANDO PLASCENCIA VEGA
 <div id="Artwork_Accordion">
 <h2>Art</h2>
 <div>
+<p><a href="zines.html#zines">Zines</a></p>
 <p><a href="collage.html#collage">Collage</a></p>
 <p><a href="still_words.html#still_words">Still Words</a></p>
 <p><a href="count_loop.html#count_loop">Count Loop</a></p>
@@ -121,7 +122,7 @@ $(function() {
     Galleria.loadTheme('./js/galleria/themes/classic/galleria.classic.min.js');
 
     // Initialize Galleria
-    Galleria.run('#galleria',{_toggleInfo:false, imageCrop:'landscape',showCounter:false, showImagenav:false, transition:'pulse',transitionSpeed:1000, carouselSteps:4,carouselSpeed: 800, imageCrop:'height' });
+    Galleria.run('#galleria',{_toggleInfo:false, showCounter:false, showImagenav:false, transition:'pulse',transitionSpeed:1000, carouselSteps:4,carouselSpeed: 800, imageCrop:false });
 
     Galleria.ready(function() {
         this.attachKeyboard({

@@ -2,7 +2,7 @@
 title: "Boundaries"
 date: 2011
 description: "A grouping of photographic, lithographic, installation and performance pieces dealing with bicultural, bilingual, binational existence."
-thumbnail: "Diego4rma_gmail_Foreign_thumb.jpg"
+thumbnail: "Diego4rma_gmail_Foreign.jpg"
 images:
   - file: "Diego4rma_gmail_Foreign.jpg"
     thumb: "Diego4rma_gmail_Foreign_thumb.jpg"

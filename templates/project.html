@@ -45,7 +45,7 @@ $(function() {
     Galleria.loadTheme('./js/galleria/themes/classic/galleria.classic.min.js');
 
     // Initialize Galleria
-    Galleria.run('#galleria',{_toggleInfo:false, imageCrop:'landscape',showCounter:false, showImagenav:false, transition:'pulse',transitionSpeed:1000, carouselSteps:4,carouselSpeed: 800, imageCrop:'height' });
+    Galleria.run('#galleria',{_toggleInfo:false, showCounter:false, showImagenav:false, transition:'pulse',transitionSpeed:1000, carouselSteps:4,carouselSpeed: 800, imageCrop:false });
 
     Galleria.ready(function() {
         this.attachKeyboard({

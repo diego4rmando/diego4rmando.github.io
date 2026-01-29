@@ -80,3 +80,5 @@ images:
 This website is being developed following the plan in `plan_assets/plan.md`. That file contains the full design vision, technical specifications, and a phased **Execution Plan** with checkboxes tracking progress.
 
 When completing work on a step or phase, update the Execution Plan section in `plan_assets/plan.md` to mark the relevant items as done. Before starting new work, read the plan to understand what has been completed and what comes next.
+
+When a user indicates that a phase (ex 4) or sub-phase (4a) is complete, add all code to a commit with a message indicating what was changed and what phase the commit completes. 

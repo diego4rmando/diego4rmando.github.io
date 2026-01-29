@@ -356,8 +356,11 @@ a:active {
 		white-space: nowrap;
 	}
 
-	/* Hide accordion on mobile, show mobile nav links */
+	/* Hide accordion and standalone About link on mobile, show mobile nav links */
 	#Artwork_Accordion {
+		display: none;
+	}
+	#menu > h2 {
 		display: none;
 	}
 	#mobile_nav {

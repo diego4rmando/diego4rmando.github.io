@@ -2,7 +2,7 @@
 title: "Count Loop"
 date: 2013
 description: "Multiple artworks including computer-drawn images, sculptures, and music created using a defined counting pattern."
-thumbnail: "diego4rma_gmail_gradient_count_thumb.gif"
+thumbnail: "diego4rma_gmail_gradient_count.gif"
 images:
   - file: "diego4rma_gmail_gradient_count.gif"
     thumb: "diego4rma_gmail_gradient_count.gif"

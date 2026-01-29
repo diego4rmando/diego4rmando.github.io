@@ -2,7 +2,7 @@
 title: "Construct"
 date: 2011
 description: "A commissioned show documenting the construction of Milstein Hall from the perspective of a student."
-thumbnail: "Diego4rma_gmail_Banded_thumb.jpg"
+thumbnail: "Diego4rma_gmail_Banded.jpg"
 images:
   - file: "Diego4rma_gmail_Banded.jpg"
     thumb: "Diego4rma_gmail_Banded_thumb.jpg"
