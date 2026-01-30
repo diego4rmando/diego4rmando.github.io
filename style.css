@@ -38,19 +38,18 @@ Date: 2017-2-27 */
 }
 /* menu containing list of groups of artworks */
 #menu{
-	margin: 10px;
+	/* margin: 10px; */
 	position: fixed;
 	width:200px;
-	bottom: 70px;
-	left: 20px;
+	top: 70px;
+	right: 20px;
 	z-index:3;
 
 	color: rgb(150, 150, 150);
 	font-family: "helvetica";
-	font-size: 10pt;
+	font-size: 15pt;
 	font-weight: bold;
 	
-	cursor: pointer;
 }
 /* element containing about info */
 #about{
@@ -73,10 +72,6 @@ Date: 2017-2-27 */
 }
 #education_work{
 	width:600px;
-}
-/* accordion containing groups of artworks */
-#Artwork_Accordion h2{
-	outline:none;
 }
 /* element containing galleria jquery*/
 #galleria{
@@ -120,7 +115,7 @@ overflow: visible;
 	width: 80%;
 	height: 80%;
 	left: 15%;
-	top: 20px;
+	top: 80px;
 	margin: 5px;
 
 
@@ -204,17 +199,18 @@ a:active {
 	left:10%;
 }
 
-/* Mobile nav links (hidden on desktop, shown on mobile) */
-#mobile_nav {
-	display: none;
+/* Site navigation links */
+#site_nav {
+	display: block;
 	color: rgb(150, 150, 150);
 	font-family: "helvetica";
-	font-size: 10pt;
+	font-size: 15pt;
 	font-weight: bold;
+	text-align: center;
 }
-#mobile_nav a {
+#site_nav a {
 	display: inline;
-	margin-right: 10px;
+	margin: 5px;
 }
 
 /* ---- Gallery Page ---- */
@@ -262,10 +258,10 @@ a:active {
 	#menu {
 		position: relative;
 		width: 100%;
-		bottom: auto;
-		left: auto;
-		margin: 10px 0;
-		padding: 0 10px;
+		right: auto;
+		top: 0px;
+		text-align: center;
+		margin: 0;
 		box-sizing: border-box;
 	}
 
@@ -354,17 +350,6 @@ a:active {
 		display: block;
 		overflow-x: auto;
 		white-space: nowrap;
-	}
-
-	/* Hide accordion and standalone About link on mobile, show mobile nav links */
-	#Artwork_Accordion {
-		display: none;
-	}
-	#menu > h2 {
-		display: none;
-	}
-	#mobile_nav {
-		display: block;
 	}
 
 	/* Gallery grid: 2 columns on mobile */
