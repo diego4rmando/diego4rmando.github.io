@@ -239,19 +239,6 @@ def generate_json(projects: dict, output_path: Path) -> None:
     print(f"Generated: {output_path}")
 
 
-def generate_menu_html(projects: dict, category: str) -> str:
-    """
-    Generate HTML for the navigation menu for a given category.
-    """
-    lines = []
-    for project in projects[category]:
-        project_id = project['id']
-        title = project['title']
-        # Generate the HTML filename
-        html_file = f"{project_id}.html"
-        lines.append(f'<p><a href="{html_file}#{project_id}">{title}</a></p>')
-    return '\n'.join(lines)
-
 
 def generate_gallery_html(project: dict) -> str:
     """
@@ -272,12 +259,11 @@ def generate_gallery_html(project: dict) -> str:
     return '\n'.join(lines)
 
 
-def generate_mobile_nav_html(projects: dict) -> str:
+def generate_nav_html(projects: dict) -> str:
     """
-    Generate the mobile navigation HTML: simple links to category gallery pages plus About.
-    Hidden on desktop via CSS, shown on mobile.
+    Generate the site navigation HTML: links to category gallery pages plus About.
     """
-    lines = ['<div id="mobile_nav">']
+    lines = ['<div id="site_nav">']
     for category in sorted(projects.keys()):
         display_name = category.replace('_', ' ').title()
         lines.append(f'<a href="gallery_{category}.html">{display_name}</a> / ')
@@ -308,19 +294,6 @@ def generate_gallery_items_html(projects: dict, category: str) -> str:
     return '\n'.join(lines)
 
 
-def generate_accordion_html(projects: dict) -> str:
-    """
-    Generate the full accordion menu HTML dynamically from all categories.
-    """
-    lines = []
-    for category in sorted(projects.keys()):
-        display_name = category.replace('_', ' ').title()
-        lines.append(f'<h2>{display_name}</h2>')
-        lines.append('<div>')
-        lines.append(generate_menu_html(projects, category))
-        lines.append('</div>')
-    return '\n'.join(lines)
-
 
 def generate_article_html(project: dict, projects: dict, article_template: str, base_path: Path) -> None:
     """
@@ -334,22 +307,16 @@ def generate_article_html(project: dict, projects: dict, article_template: str, 
 
     article_body = article_md.read_text(encoding='utf-8')
 
-    categories = sorted(projects.keys())
-    accordion_active = categories.index(project['category']) if project['category'] in categories else 0
-    accordion_html = generate_accordion_html(projects)
-
     extra_head = ''
     if '\\[' in article_body or '\\(' in article_body:
         extra_head = '<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>'
 
-    mobile_nav_html = generate_mobile_nav_html(projects)
+    nav_html = generate_nav_html(projects)
 
     html = article_template
     html = html.replace('{{ARTICLE_TITLE}}', project['title'])
     html = html.replace('{{ARTICLE_BODY}}', article_body)
-    html = html.replace('{{ACCORDION_MENU}}', accordion_html)
-    html = html.replace('{{MOBILE_NAV}}', mobile_nav_html)
-    html = html.replace('{{ACCORDION_ACTIVE}}', str(accordion_active))
+    html = html.replace('{{NAV_MENU}}', nav_html)
     html = html.replace('{{EXTRA_HEAD}}', extra_head)
 
     output_path = base_path / f"{project['id']}_article.html"
@@ -363,13 +330,6 @@ def generate_project_html(project: dict, projects: dict, template: str, base_pat
     Generate an HTML file for a single project.
     If the project has article: true, also generates a separate article page.
     """
-    categories = sorted(projects.keys())
-    # Accordion active state = index of the project's category
-    accordion_active = categories.index(project['category']) if project['category'] in categories else 0
-
-    # Generate accordion menu HTML for all categories
-    accordion_html = generate_accordion_html(projects)
-
     # Generate gallery HTML
     gallery_html = generate_gallery_html(project)
 
@@ -381,17 +341,15 @@ def generate_project_html(project: dict, projects: dict, template: str, base_pat
     if '\\[' in body_html or '\\(' in body_html:
         extra_head = '<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>'
 
-    # Generate mobile nav
-    mobile_nav_html = generate_mobile_nav_html(projects)
+    # Generate nav
+    nav_html = generate_nav_html(projects)
 
     # Replace placeholders in template
     html = template
-    html = html.replace('{{ACCORDION_MENU}}', accordion_html)
-    html = html.replace('{{MOBILE_NAV}}', mobile_nav_html)
+    html = html.replace('{{NAV_MENU}}', nav_html)
     html = html.replace('{{GALLERY_IMAGES}}', gallery_html)
     html = html.replace('{{PROJECT_BODY}}', body_html)
     html = html.replace('{{EXTRA_HEAD}}', extra_head)
-    html = html.replace('{{ACCORDION_ACTIVE}}', str(accordion_active))
 
     # Write the HTML file
     output_path = base_path / f"{project['id']}.html"
@@ -406,7 +364,7 @@ def generate_project_html(project: dict, projects: dict, template: str, base_pat
 def generate_standalone_page(template_name: str, projects: dict, base_path: Path) -> None:
     """
     Generate a standalone page (index.html, main.html, about.html) from its template.
-    Replaces {{ACCORDION_MENU}} and {{MOBILE_NAV}} with dynamically generated HTML.
+    Replaces {{NAV_MENU}} with dynamically generated navigation HTML.
     """
     template_path = base_path / 'templates' / template_name
     if not template_path.exists():
@@ -414,10 +372,8 @@ def generate_standalone_page(template_name: str, projects: dict, base_path: Path
         return
 
     template = template_path.read_text(encoding='utf-8')
-    accordion_html = generate_accordion_html(projects)
-    mobile_nav_html = generate_mobile_nav_html(projects)
-    html = template.replace('{{ACCORDION_MENU}}', accordion_html)
-    html = html.replace('{{MOBILE_NAV}}', mobile_nav_html)
+    nav_html = generate_nav_html(projects)
+    html = template.replace('{{NAV_MENU}}', nav_html)
 
     output_path = base_path / template_name
     output_path.write_text(html, encoding='utf-8')
@@ -429,20 +385,14 @@ def generate_category_gallery_page(category: str, projects: dict, gallery_templa
     Generate a gallery page for a single category (e.g. gallery_art.html).
     Shows all projects in a responsive thumbnail grid.
     """
-    categories = sorted(projects.keys())
-    accordion_active = categories.index(category) if category in categories else 0
-
-    accordion_html = generate_accordion_html(projects)
-    mobile_nav_html = generate_mobile_nav_html(projects)
+    nav_html = generate_nav_html(projects)
     gallery_items_html = generate_gallery_items_html(projects, category)
     display_name = category.replace('_', ' ').title()
 
     html = gallery_template
     html = html.replace('{{GALLERY_TITLE}}', display_name)
-    html = html.replace('{{ACCORDION_MENU}}', accordion_html)
-    html = html.replace('{{MOBILE_NAV}}', mobile_nav_html)
+    html = html.replace('{{NAV_MENU}}', nav_html)
     html = html.replace('{{GALLERY_ITEMS}}', gallery_items_html)
-    html = html.replace('{{ACCORDION_ACTIVE}}', str(accordion_active))
 
     output_path = base_path / f"gallery_{category}.html"
     output_path.write_text(html, encoding='utf-8')
