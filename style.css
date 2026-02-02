@@ -226,11 +226,15 @@ a:active {
 /* ---- Index Page Color Overrides ---- */
 .page-index #ARTIST_NAME,
 .page-index #ARTIST_NAME a {
-	color: rgb(120, 120, 120);
+		color: rgb(161, 154, 146);
+	/* color: rgb(230, 227, 222); Warm gray */
+	/* color: rgb(226, 231, 238); Cool gray */
 }
 .page-index #site_nav,
 .page-index #site_nav a {
-	color: rgb(150, 150, 150);
+	/* color: rgb(150, 150, 150); */
+	/* color: rgb(154, 163, 173); */
+	color: rgb(161, 154, 146);
 }
 
 /* ---- Gallery Page ---- */
