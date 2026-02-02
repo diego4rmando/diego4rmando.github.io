@@ -21,20 +21,20 @@ var ThreeBodySim = (function () {
         // Figure-eight choreography (Chenciner & Montgomery, 2000)
         // Three equal masses chase each other around a figure-eight curve.
         // Reference values from Chenciner-Montgomery with G=1, m=1.
-        figureEight: {
-            name: "Figure-Eight",
-            masses: [1, 1, 1],
-            positions: [
-                [-0.97000436, 0.24308753],
-                [0.97000436, -0.24308753],
-                [0.0, 0.0]
-            ],
-            velocities: [
-                [0.4662036850, 0.4323657300],
-                [0.4662036850, 0.4323657300],
-                [-0.9324073700, -0.8647314600]
-            ]
-        },
+        // figureEight: {
+        //     name: "Figure-Eight",
+        //     masses: [1, 1, 1],
+        //     positions: [
+        //         [-0.97000436, 0.24308753],
+        //         [0.97000436, -0.24308753],
+        //         [0.0, 0.0]
+        //     ],
+        //     velocities: [
+        //         [0.4662036850, 0.4323657300],
+        //         [0.4662036850, 0.4323657300],
+        //         [-0.9324073700, -0.8647314600]
+        //     ]
+        // },
 
         // Moth I choreography (Šuvakov & Dmitrašinović, 2013)
         // Three equal masses trace a moth-shaped periodic orbit.

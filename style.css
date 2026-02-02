@@ -207,6 +207,16 @@ a:active {
 	margin: 5px;
 }
 
+/* ---- Index Page Color Overrides ---- */
+.page-index #ARTIST_NAME,
+.page-index #ARTIST_NAME a {
+	color: rgb(120, 120, 120);
+}
+.page-index #site_nav,
+.page-index #site_nav a {
+	color: rgb(150, 150, 150);
+}
+
 /* ---- Gallery Page ---- */
 #gallery_page {
 	padding: 20px 0;
