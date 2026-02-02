@@ -147,12 +147,12 @@ Build in layers, testing each before moving to the next:
 - [x] Define initial conditions data for three periodic solution families (figure-eight, Moth I, Euler) — Lagrange replaced with Moth I (Šuvakov & Dmitrašinović) because the equal-mass Lagrange equilateral orbit is linearly unstable
 - [x] Verify each set of initial conditions produces a stable periodic orbit (Python verification + standalone `test_three_body.html`)
 
-### Phase 3b: Canvas Rendering & Background
-- [ ] Set up full-viewport HTML Canvas on the front page, replacing the CSS background gradient
-- [ ] Render the shifting background gradient directly on the canvas (same colors as current CSS, kept in easily tunable config variables)
-- [ ] Render three bodies as glowing circles with warm palette (gold, orange, red-orange)
-- [ ] Implement fading trail effect: store recent positions, draw with decreasing opacity
-- [ ] Add glow/bloom effect to the points of light (radial gradient or shadow blur)
+### Phase 3b: Canvas Rendering & Background ✅
+- [x] Set up full-viewport HTML Canvas on the front page, replacing the CSS background gradient
+- [x] Render the shifting background gradient directly on the canvas (same colors as current CSS, kept in easily tunable config variables)
+- [x] Render three bodies as glowing circles with warm palette (gold, orange, red-orange)
+- [x] Implement fading trail effect: store recent positions, draw with decreasing opacity
+- [x] Add glow/bloom effect to the points of light (radial gradient or shadow blur)
 
 ### Phase 3c: Integration & Polish
 - [ ] On page load, randomly select one of the three periodic solution families

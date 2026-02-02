@@ -12,27 +12,16 @@ var ThreeBodyRenderer = (function () {
     // All visual parameters are gathered here for easy tuning.
 
     var CONFIG = {
-        // Background gradient — explicit color stops that the gradient cycles through.
-        // Each stop is [R, G, B]. The gradient smoothly interpolates between consecutive
-        // stops, looping back to the first. Add, remove, or reorder stops to taste.
+        // Background gradient
         gradient: {
-            stops: [
-                [255, 255, 200],  // soft yellow
-                // [255, 200, 200],  // soft pink
-                [255, 220, 180],  // soft peach
-                [242, 247, 161], // F2F7A1 Light Yellow
-                [70, 194, 203],   // 46C2CB Cyan
-                [109,103, 228],  // 6D67E4 Neutral Blue
-                [69, 60, 103],  // 453C67 Dark Purple
-
-            ],
+            lightShift: 205,       // minimum brightness (0-255); higher = lighter pastels
             cycleDuration: 60000,  // full color cycle in milliseconds (60s = one full rotation)
-            colorOffset: 0.5      // phase offset between top and bottom gradient colors (0-1)
+            colorOffset: 100       // offset between top and bottom gradient colors
         },
 
         // Body rendering
         body: {
-            colors: ["#ffffff", "#ffffff", "#ffffff"], // white
+            colors: ["#FFD700", "#FF8C00", "#FF4500"], // gold, orange, red-orange
             coreRadius: 5,         // radius of the bright core circle
             glowRadius: 18,        // radius of the outer glow
             glowAlpha: 0.35,       // opacity of the outer glow
@@ -56,34 +45,74 @@ var ThreeBodyRenderer = (function () {
         }
     };
 
-    // ===================== GRADIENT =====================
+    // ===================== GRADIENT (ported from color_space_fade.js) =====================
 
-    // Interpolate between color stops at a given phase (0-1, wraps around).
-    // Stops are an array of [R,G,B] arrays; phase 0 = first stop, phase 1 = back to first.
-    function interpolateStops(phase, stops) {
-        var n = stops.length;
-        // Wrap phase to [0, 1)
-        phase = phase - Math.floor(phase);
-        var scaled = phase * n;
-        var idx = Math.floor(scaled);
-        var t = scaled - idx;
-        var a = stops[idx % n];
-        var b = stops[(idx + 1) % n];
-        return [
-            Math.round(a[0] + (b[0] - a[0]) * t),
-            Math.round(a[1] + (b[1] - a[1]) * t),
-            Math.round(a[2] + (b[2] - a[2]) * t)
-        ];
+    // Convert a color-space position to RGB, cycling through 6 hue segments.
+    // CS: position in color space (0 to valRange*6)
+    // lightShift: minimum channel value (higher = lighter pastels)
+    function csToRGB(CS, lightShift) {
+        var valRange = 255 - lightShift;
+        var maxVal = 255;
+        var minVal = lightShift;
+        var R, G, B;
+
+        // Wrap around the full cycle
+        if (CS > valRange * 6) {
+            CS = CS % (valRange * 6);
+        }
+
+        if (CS > 0 && CS <= valRange) {
+            R = maxVal;
+            G = minVal;
+            B = minVal + CS;
+        } else if (CS > valRange && CS <= valRange * 2) {
+            var t = CS - valRange;
+            R = maxVal - t;
+            G = minVal;
+            B = maxVal;
+        } else if (CS > valRange * 2 && CS <= valRange * 3) {
+            var t = CS - valRange * 2;
+            R = minVal;
+            G = minVal + t;
+            B = maxVal;
+        } else if (CS > valRange * 3 && CS <= valRange * 4) {
+            var t = CS - valRange * 3;
+            R = minVal;
+            G = maxVal;
+            B = maxVal - t;
+        } else if (CS > valRange * 4 && CS <= valRange * 5) {
+            var t = CS - valRange * 4;
+            R = minVal + t;
+            G = maxVal;
+            B = minVal;
+        } else if (CS > valRange * 5 && CS <= valRange * 6) {
+            var t = CS - valRange * 5;
+            R = maxVal;
+            G = maxVal - t;
+            B = minVal;
+        } else {
+            // CS === 0
+            R = maxVal;
+            G = minVal;
+            B = minVal;
+        }
+
+        return [Math.round(R), Math.round(G), Math.round(B)];
     }
 
     // Get the two gradient colors for the current time.
     // Returns { top: [R,G,B], bottom: [R,G,B] }
     function getGradientColors(timestamp) {
-        var stops = CONFIG.gradient.stops;
-        // Phase: 0-1 over the full cycle duration
+        var lightShift = CONFIG.gradient.lightShift;
+        var valRange = 255 - lightShift;
+        var totalRange = valRange * 6;
+
+        // Use timestamp for smooth continuous cycling
         var phase = (timestamp % CONFIG.gradient.cycleDuration) / CONFIG.gradient.cycleDuration;
-        var top = interpolateStops(phase, stops);
-        var bottom = interpolateStops(phase + CONFIG.gradient.colorOffset, stops);
+        var CS = Math.round(phase * totalRange);
+
+        var top = csToRGB(CS, lightShift);
+        var bottom = csToRGB(CS + CONFIG.gradient.colorOffset, lightShift);
         return { top: top, bottom: bottom };
     }
 
@@ -200,7 +229,6 @@ var ThreeBodyRenderer = (function () {
 
         this._resize = this._onResize.bind(this);
         window.addEventListener("resize", this._resize);
-        window.addEventListener("orientationchange", this._resize);
         this._fitCanvas();
     }
 
@@ -263,8 +291,8 @@ var ThreeBodyRenderer = (function () {
             }
         }
 
-        // Background gradient (uses Date.now() for global time alignment across page loads)
-        var gradColors = getGradientColors(Date.now());
+        // Background gradient
+        var gradColors = getGradientColors(timestamp || Date.now());
         drawGradient(ctx, w, h, gradColors);
 
         // Compute brightness adjustment: darken bodies/trails on light backgrounds
@@ -285,7 +313,6 @@ var ThreeBodyRenderer = (function () {
     Renderer.prototype.destroy = function () {
         this.stop();
         window.removeEventListener("resize", this._resize);
-        window.removeEventListener("orientationchange", this._resize);
     };
 
     // ===================== PUBLIC API =====================
