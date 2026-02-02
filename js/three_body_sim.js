@@ -2,12 +2,11 @@
 // Author: Diego Armando Plascencia Vega
 //
 // RK4 integrator for Newtonian gravitational 3-body problem.
-// Provides initial conditions for several periodic solution families:
+// Provides initial conditions for three periodic solution families:
 //   1. Figure-eight choreography (Moore / Chenciner-Montgomery)
-//   2. Moth choreographies (Šuvakov & Dmitrašinović, 2013)
-//   3. Broucke flower orbits (Broucke, 1975) — stable petal patterns
-//   4. Hierarchical triple (tight binary + wide outer orbit)
-//   5. Euler collinear orbit
+//   2. Moth I choreography (Šuvakov & Dmitrašinović, 2013)
+//   3. Hierarchical triple (tight binary + wide outer orbit)
+//   4. Euler collinear orbit
 
 var ThreeBodySim = (function () {
     "use strict";
@@ -22,20 +21,20 @@ var ThreeBodySim = (function () {
         // Figure-eight choreography (Chenciner & Montgomery, 2000)
         // Three equal masses chase each other around a figure-eight curve.
         // Reference values from Chenciner-Montgomery with G=1, m=1.
-        // figureEight: {
-        //     name: "Figure-Eight",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-0.97000436, 0.24308753],
-        //         [0.97000436, -0.24308753],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.4662036850, 0.4323657300],
-        //         [0.4662036850, 0.4323657300],
-        //         [-0.9324073700, -0.8647314600]
-        //     ]
-        // },
+        figureEight: {
+            name: "Figure-Eight",
+            masses: [1, 1, 1],
+            positions: [
+                [-0.97000436, 0.24308753],
+                [0.97000436, -0.24308753],
+                [0.0, 0.0]
+            ],
+            velocities: [
+                [0.4662036850, 0.4323657300],
+                [0.4662036850, 0.4323657300],
+                [-0.9324073700, -0.8647314600]
+            ]
+        },
 
         // Moth I choreography (Šuvakov & Dmitrašinović, 2013)
         // Three equal masses trace a moth-shaped periodic orbit.
@@ -71,238 +70,6 @@ var ThreeBodySim = (function () {
                 [-0.87834, -0.90594]
             ]
         },
-
-        // // Broucke A2 - stable 3-petal flower orbit (Broucke, 1975) WRONG
-        // // Satellite-type orbit where two bodies form a tight pair while the third swoops in/out.
-        // brouckeA2: {
-        //     name: "Flower (3-petal)",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-0.9892620043, 0.0],
-        //         [2.2096177241, 0.0],
-        //         [-0.2203557197, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.0, 1.9169244185],
-        //         [0.0, 0.1910268738],
-        //         [0.0, -2.1079512924]
-        //     ]
-        // },
-
-        // // Broucke R7 - stable 5-petal flower orbit (Broucke, 1975) WRONG
-        // // Creates a beautiful 5-lobed rosette pattern.
-        // brouckeR7: {
-        //     name: "Flower (5-petal)",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [0.8783826513, 0.0],
-        //         [-0.3171529189, 0.0],
-        //         [-0.5612297324, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.0, 0.7284919942],
-        //         [0.0, 2.2121723761],
-        //         [0.0, -2.9406643703]
-        //     ]
-        // },
-
-        // // Moth III choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // mothIII: {
-        //     name: "Moth III",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.383444, 0.377364],
-        //         [0.383444, 0.377364],
-        //         [-0.766888, -0.754728]
-        //     ]
-        // },
-
-        // // Butterfly I choreography (Šuvakov & Dmitrašinović, 2013)
-        // // Beautiful butterfly-shaped periodic orbit. UNSTABLE
-        // butterflyI: {
-        //     name: "Butterfly I",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.306893, 0.125507],
-        //         [0.306893, 0.125507],
-        //         [-0.613786, -0.251014]
-        //     ]
-        // },
-
-        // // Butterfly II choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // butterflyII: {
-        //     name: "Butterfly II",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.392955, 0.097579],
-        //         [0.392955, 0.097579],
-        //         [-0.785910, -0.195158]
-        //     ]
-        // },
-
-        // // Butterfly III choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // // Linearly stable variant.
-        // butterflyIII: {
-        //     name: "Butterfly III",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.405916, 0.230163],
-        //         [0.405916, 0.230163],
-        //         [-0.811832, -0.460326]
-        //     ]
-        // },
-
-        // // Butterfly IV choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // butterflyIV: {
-        //     name: "Butterfly IV",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.350112, 0.079339],
-        //         [0.350112, 0.079339],
-        //         [-0.700224, -0.158678]
-        //     ]
-        // },
-
-        // // Bumblebee choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // // Linearly stable periodic orbit.
-        // bumblebee: {
-        //     name: "Bumblebee",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.184279, 0.587188],
-        //         [0.184279, 0.587188],
-        //         [-0.368558, -1.174376]
-        //     ]
-        // },
-
-        // // Dragonfly choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // // Elegant elongated periodic orbit.
-        // dragonfly: {
-        //     name: "Dragonfly",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.080584, 0.588836],
-        //         [0.080584, 0.588836],
-        //         [-0.161168, -1.177672]
-        //     ]
-        // },
-
-        // // Goggles choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // // Two-loop figure resembling goggles.
-        // goggles: {
-        //     name: "Goggles",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.083300, 0.127889],
-        //         [0.083300, 0.127889],
-        //         [-0.166600, -0.255778]
-        //     ]
-        // },
-
-        // // Yarn choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // // Complex tangled periodic orbit.
-        // yarn: {
-        //     name: "Yarn",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.559064, 0.349192],
-        //         [0.559064, 0.349192],
-        //         [-1.118128, -0.698384]
-        //     ]
-        // },
-
-        // // Yin-Yang 1a choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // yinYang1a: {
-        //     name: "Yin-Yang 1a",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.513938, 0.304736],
-        //         [0.513938, 0.304736],
-        //         [-1.027876, -0.609472]
-        //     ]
-        // },
-
-        // // Yin-Yang 1b choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // yinYang1b: {
-        //     name: "Yin-Yang 1b",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.282699, 0.327209],
-        //         [0.282699, 0.327209],
-        //         [-0.565398, -0.654418]
-        //     ]
-        // },
-
-        // // Yin-Yang 2a choreography (Šuvakov & Dmitrašinović, 2013) UNSTABLE
-        // yinYang2a: {
-        //     name: "Yin-Yang 2a",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-1.0, 0.0],
-        //         [1.0, 0.0],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.416822, 0.330333],
-        //         [0.416822, 0.330333],
-        //         [-0.833644, -0.660666]
-        //     ]
-        // },
 
         // Hierarchical triple: tight inner binary + wide outer orbit
         // Two bodies orbit each other closely while the third sweeps a large circle.
