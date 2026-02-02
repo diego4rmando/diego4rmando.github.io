@@ -20,26 +20,30 @@ The objective of this project is to update my personal website that displays the
 # Website Design
 I propose a design that is as follows.
 
-The front page of the website will display ASCII objects animated as point masses orbiting a central "sun" (the About object) according to gravitational laws. Only the central sun exerts gravitational pull on the other objects — objects do not affect each other. This keeps the physics computation O(n) rather than O(n²) while still producing visually compelling orbital motion. Initial velocities and slight random perturbations will keep orbits varied and natural-looking.
+The front page of the website will display a **three-body problem simulation** — three points of light tracing periodic solutions of the Newtonian gravitational three-body problem on an HTML Canvas. Each time the page is loaded (or refreshed), the simulation randomly selects one of three classical periodic solution families:
+
+1. **Lagrange (equilateral triangle)** — three equal masses maintain an equilateral triangle as they orbit their common center of mass
+2. **Euler (collinear)** — three masses remain collinear, oscillating along a line through the center of mass
+3. **Figure-eight choreography** — three equal masses chase each other around a figure-eight shaped curve (discovered numerically by Moore, proved by Chenciner & Montgomery)
+
+The simulation uses real-time Newtonian gravity integration (4th-order Runge-Kutta) to evolve the positions of the three bodies each frame. Each body is rendered as a glowing point of light in a **warm palette** (gold, orange, red-orange), with a fading luminous trail behind it that visualizes the orbital path. The trails gradually fade to transparent, creating an elegant visual of the motion history.
+
+The three bodies are purely visual/decorative — they do not link to projects. All project navigation happens through the menu.
 
 ![Front Page Drawing](drawings_concept.png)
 
-* The __background__ gradient colors wil be similar to the old website simulating a sky moving from day to night to day. But now the colors will go through a more thorough "night" phase.
-* The __stars__ will each represent and link to one project on the website. Each project declares its own ASCII character in its `project.md` metadata (e.g. `*` for art, `O` for tech — but this is data, not code). Categories are not hard-coded; they are derived from the folder names under `/projects/`.
-* One object, slightly larger than the other ones will be the __sphere__ which will link to the about page.
-* All objects will change in color as the background changes to make sure they are visible. The objects will be lighter colored at night (to look like celestial objects) and darker in the daytime (darker objects against a lighter background).
-* When the mouse hovers over an item moving around (thus "catching" it) the object will stop and display an icon to represent the project. Clicking on the object will open up a gallery to display the object.
-* **Mobile interaction**: On touch devices, users tap an object to "catch" it (same behavior as hover on desktop).
+* The __background__ gradient colors functionality will remain as-is for now. These colors may be tuned later.
+* The __three bodies__ are rendered as glowing points with warm colors (gold, orange, red-orange). Their brightness/opacity adjusts with the background to remain visible. These colors may be tuned later so it should be easy to do so.
+* Each body leaves a __fading trail__ of light in its assigned color, showing its recent orbital path. Trails fade to transparent over a configurable number of past positions.
 * **Artist name on mobile**: The name "DIEGO ARMANDO PLASCENCIA VEGA" must always display stacked as two lines (`DIEGO ARMANDO` / `PLASCENCIA VEGA`), matching the desktop layout. On mobile the name container is constrained to a `max-width` that forces this wrap.
-* There will still be a "menu" like the current design which shows three options:
+* The old jQuery UI accordion sidebar navigation has been removed and replaced with a simple top navigation menu:
 
                                 {CATEGORY_1} / {CATEGORY_2} / ... / ABOUT
 
     * The menu is generated dynamically from the category folder names under `/projects/`, plus a fixed ABOUT link. No categories are hard-coded.
     * The menu will be displayed on the top right of the page
     * Clicking the about page will simply transition you to the "about" page with information about me (similar to the current about page)
-    * **Desktop**: Clicking a category tab will result in only the corresponding objects fading away and lining up in chronological order leading you to a "gallery" in which you can view the different projects (similarly to how the website works now). The accordion menu remains as-is.
-    * **Mobile**: Instead of the accordion, the menu displays simple links to dedicated **category gallery pages** (one per category, e.g. `gallery_art.html`, `gallery_tech.html`). Each gallery page shows all projects in that category as a responsive thumbnail grid sorted chronologically. This avoids the accordion pushing content off-screen on small devices.
+    * The menu displays simple links to dedicated **category gallery pages** (one per category, e.g. `gallery_art.html`, `gallery_tech.html`). Each gallery page shows all projects in that category as a responsive thumbnail grid sorted chronologically.
 
 ## Accessibility
 * The dynamically generated category menu (plus ABOUT) will always be visible and fully keyboard-navigable
@@ -76,23 +80,40 @@ Each `project.md` file will contain YAML frontmatter with the following fields:
 ```yaml
 ---
 title: "Project Title"
-date: 2024-01-15
+date: 2024-10-08
 description: "A brief description of the project"
 thumbnail: "thumbnail.png"
-ascii_char: "*"
+images:
+  - file: "image1.png"
+    thumb: "image1_thumb.png"
+    title: "Display Title"
+    caption: "Caption text"
+  - file: "image2.png"
+    thumb: "image2_thumb.png"
+    title: "Another Image"
+    caption: "Another caption"
 ---
 
 Full project description in markdown...
 ```
 
-The `ascii_char` field determines what character represents this project in the front-page animation. This is per-project metadata, not derived from the category — giving full flexibility to change characters without changing code.
+- `date`: Year (or full date) used for chronological sorting in galleries
+- `images`: Array of gallery images, each with `file` (full-size), `thumb` (thumbnail), `title`, and `caption`
 
 Adding content should be as easy as adding some files to the file structure, running the Python script, opening a PR, reviewing and pushing (without changing the core code). Adding a new *category* is equally simple: create a new folder under `/projects/` and the generator and front-end will pick it up automatically.
 
-## Front-end Animation
-* **Technology**: HTML Canvas for rendering the gravitational animation
-* **Expected objects**: 10-25 project objects on screen at once
-* **Performance**: Single-attractor physics model (O(n) per frame) ensures smooth Canvas animation for this number of objects on both desktop and mobile
+## Front-end Animation: Three-Body Problem Simulation
+* **Technology**: HTML Canvas for rendering the simulation
+* **Physics engine**: Real-time Newtonian gravity integration using 4th-order Runge-Kutta (RK4). Three bodies with mutual gravitational attraction (O(n²) = O(9) force calculations per step — trivial for 3 bodies).
+* **Initial conditions**: Stored in `js/three_body_sim.js` as part of the simulation module. Five orbit configurations (masses may be equal or unequal depending on the orbit; choreographies require equal masses, others do not):
+    1. Figure-eight choreography (Moore/Chenciner-Montgomery)
+    2. Moth I choreography (Šuvakov & Dmitrašinović, 2013)
+    3. Moth II choreography (Šuvakov & Dmitrašinović, 2013)
+    4. Hierarchical triple (tight binary + wide outer orbit)
+    5. Euler collinear orbit (eccentric variant, 1.20× velocity scaling)
+* **On page load**: One configuration is chosen at random, initial conditions are loaded, and the simulation begins.
+* **Rendering**: Each body is drawn as a glowing circle (warm palette: gold `#FFD700`, orange `#FF8C00`, red-orange `#FF4500`). A fading trail stores the last N positions and draws them with decreasing opacity.
+* **Performance**: RK4 with 3 bodies is extremely lightweight. Adaptive time-stepping or fixed small dt ensures stability for the periodic orbits.
 
 # Execution Plan
 The creation of the new website should happen in the following steps, stopping at each to test the new functionality manually and adding a commit at each step of the way.
@@ -110,38 +131,49 @@ The creation of the new website should happen in the following steps, stopping a
 - [x] Audit current CSS for mobile breakpoints
 - [x] Add viewport meta tag to template and standalone pages (about.html, index.html)
 - [x] Implement responsive media queries (≤768px breakpoint) for menu, content, galleria, about page
-- [ ] Test on iPhone and various screen sizes (manual testing needed)
+- [x] Test on iPhone and various screen sizes (manual testing needed)
 
 ## Phase 2b: Mobile Navigation Improvements
-- [ ] Fix artist name stacking: constrain `#ARTIST_NAME` `max-width` in the mobile media query so "DIEGO ARMANDO / PLASCENCIA VEGA" always wraps to two lines
-- [ ] Create a `gallery` HTML template for category gallery pages (responsive thumbnail grid, sorted by date)
-- [ ] Update `generate_site.py` to generate one gallery page per category (e.g. `gallery_art.html`, `gallery_tech.html`)
-- [ ] On mobile (≤768px), replace the accordion menu with simple links to the category gallery pages (plus About)
-- [ ] Keep accordion behavior unchanged on desktop
-- [ ] Test gallery pages on mobile and desktop
+- [x] Fix artist name stacking: constrain `#ARTIST_NAME` `max-width` in the mobile media query so "DIEGO ARMANDO / PLASCENCIA VEGA" always wraps to two lines
+- [x] Create a `gallery` HTML template for category gallery pages (responsive thumbnail grid, sorted by date)
+- [x] Update `generate_site.py` to generate one gallery page per category (e.g. `gallery_art.html`, `gallery_tech.html`)
+- [x] Test gallery pages on mobile and desktop
 
-## Phase 3: Front Page Animation
+## Phase 3: Front Page Animation — Three-Body Problem Simulation
 Build in layers, testing each before moving to the next:
 
-### 3a. Background Gradient
-- [ ] Implement day/night gradient cycle on Canvas
-- [ ] Ensure colors transition smoothly through night phase
+### Phase 3a: Physics Engine ✅
+- [x] Create `js/three_body_sim.js` with RK4 integrator for Newtonian 3-body gravity
+- [x] Define initial conditions data for three periodic solution families (figure-eight, Moth I, Euler) — Lagrange replaced with Moth I (Šuvakov & Dmitrašinović) because the equal-mass Lagrange equilateral orbit is linearly unstable
+- [x] Verify each set of initial conditions produces a stable periodic orbit (Python verification + standalone `test_three_body.html`)
 
-### 3b. Object Rendering
-- [ ] Render each project's ASCII character (from `ascii_char` metadata) on Canvas
-- [ ] Implement color changes based on background (light at night, dark in day)
-- [ ] Add the larger "sphere" object for the About link
+### Phase 3b: Canvas Rendering & Background
+- [ ] Set up full-viewport HTML Canvas on the front page, replacing the CSS background gradient
+- [ ] Render the shifting background gradient directly on the canvas (same colors as current CSS, kept in easily tunable config variables)
+- [ ] Render three bodies as glowing circles with warm palette (gold, orange, red-orange)
+- [ ] Implement fading trail effect: store recent positions, draw with decreasing opacity
+- [ ] Add glow/bloom effect to the points of light (radial gradient or shadow blur)
 
-### 3c. Physics Simulation
-- [ ] Implement gravitational attraction from the central "sun" (About object) to all project objects (single-attractor model, O(n) per frame)
-- [ ] Add varied initial velocities and slight random perturbations to prevent uniform orbits
-- [ ] Tune mass/distance parameters for visually pleasing orbital motion
-- [ ] Verify smooth performance with 10-25 objects on both desktop and mobile
+### Phase 3c: Integration & Polish
+- [ ] On page load, randomly select one of the three periodic solution families
+- [ ] Connect physics engine output to canvas renderer in a requestAnimationFrame loop
+- [ ] Adjust body/trail brightness based on background gradient phase (lighter on dark, darker on light)
+- [ ] Handle canvas resize on window resize and orientation change
+- [ ] Test performance on mobile devices
+- [ ] Tune simulation speed, trail length, glow intensity for visual appeal
+- [ ] Deprecate `main.html`: remove from generator standalone pages list, delete template and generated file, update any links pointing to it
+- [ ] Clean up any remaining accordion artifacts (stale generated HTML files with old accordion code — regenerate to fix)
+- [ ] Remove `epicycles_article.html` (stale hand-crafted file; article content has been migrated to the GitHub repo and linked from the project description)
 
-### 3d. Interactions
-- [ ] Desktop: Hover to catch object, display project icon
-- [ ] Mobile: Tap to catch object, display project icon
-- [ ] Click/tap on caught object opens gallery
-- [ ] Menu click on any category transitions those objects to chronological lineup
-- [ ] Ensure menu remains keyboard-accessible throughout
+## Phase 4: Final Tuning & Testing
+- [ ] Tune body colors, trail colors, glow intensity, and background gradient palette
+- [ ] Tune simulation speed and trail length for visual appeal
+- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
+- [ ] Mobile device testing (iOS Safari, Android Chrome)
+- [ ] Remove unused legacy files (jQuery UI directory if no longer needed, old assets)
+- [ ] Final review of all generated pages for consistency
 
+
+# References
+* https://en.wikipedia.org/wiki/Three-body_problem
+* https://en.wikipedia.org/wiki/Central_configuration
