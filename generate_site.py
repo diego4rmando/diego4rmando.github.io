@@ -363,7 +363,7 @@ def generate_project_html(project: dict, projects: dict, template: str, base_pat
 
 def generate_standalone_page(template_name: str, projects: dict, base_path: Path) -> None:
     """
-    Generate a standalone page (index.html, main.html, about.html) from its template.
+    Generate a standalone page (index.html, about.html) from its template.
     Replaces {{NAV_MENU}} with dynamically generated navigation HTML.
     """
     template_path = base_path / 'templates' / template_name
@@ -430,7 +430,7 @@ def generate_all_html(projects: dict, base_path: Path) -> None:
             generate_category_gallery_page(category, projects, gallery_template, base_path)
 
     # Generate standalone pages from templates
-    standalone_pages = ['main.html', 'index.html', 'about.html']
+    standalone_pages = ['index.html', 'about.html']
     for page_name in standalone_pages:
         generate_standalone_page(page_name, projects, base_path)
 

@@ -154,23 +154,23 @@ Build in layers, testing each before moving to the next:
 - [x] Implement fading trail effect: store recent positions, draw with decreasing opacity
 - [x] Add glow/bloom effect to the points of light (radial gradient or shadow blur)
 
-### Phase 3c: Integration & Polish
-- [ ] On page load, randomly select one of the three periodic solution families
-- [ ] Connect physics engine output to canvas renderer in a requestAnimationFrame loop
-- [ ] Adjust body/trail brightness based on background gradient phase (lighter on dark, darker on light)
-- [ ] Handle canvas resize on window resize and orientation change
-- [ ] Test performance on mobile devices
-- [ ] Tune simulation speed, trail length, glow intensity for visual appeal
-- [ ] Deprecate `main.html`: remove from generator standalone pages list, delete template and generated file, update any links pointing to it
-- [ ] Clean up any remaining accordion artifacts (stale generated HTML files with old accordion code — regenerate to fix)
-- [ ] Remove `epicycles_article.html` (stale hand-crafted file; article content has been migrated to the GitHub repo and linked from the project description)
+### Phase 3c: Integration & Polish ✅
+- [x] On page load, randomly select one of the three periodic solution families
+- [x] Connect physics engine output to canvas renderer in a requestAnimationFrame loop
+- [x] Adjust body/trail brightness based on background gradient phase (lighter on dark, darker on light)
+- [x] Handle canvas resize on window resize and orientation change
+- [x] Test performance on mobile devices
+- [x] Tune simulation speed, trail length, glow intensity for visual appeal
+- [x] Deprecate `main.html`: remove from generator standalone pages list, delete template and generated file, update any links pointing to it
+- [x] Clean up any remaining accordion artifacts (stale generated HTML files with old accordion code — regenerate to fix)
+- [x] Remove `epicycles_article.html` (stale hand-crafted file; article content has been migrated to the GitHub repo and linked from the project description)
 
 ## Phase 4: Final Tuning & Testing
 - [ ] Tune body colors, trail colors, glow intensity, and background gradient palette
 - [ ] Tune simulation speed and trail length for visual appeal
 - [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
 - [ ] Mobile device testing (iOS Safari, Android Chrome)
-- [ ] Remove unused legacy files (jQuery UI directory if no longer needed, old assets)
+- [ ] Remove unused legacy files (jQuery UI directory already removed in 3c; check for other old assets)
 - [ ] Final review of all generated pages for consistency
 
 

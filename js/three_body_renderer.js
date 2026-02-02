@@ -200,6 +200,7 @@ var ThreeBodyRenderer = (function () {
 
         this._resize = this._onResize.bind(this);
         window.addEventListener("resize", this._resize);
+        window.addEventListener("orientationchange", this._resize);
         this._fitCanvas();
     }
 
@@ -284,6 +285,7 @@ var ThreeBodyRenderer = (function () {
     Renderer.prototype.destroy = function () {
         this.stop();
         window.removeEventListener("resize", this._resize);
+        window.removeEventListener("orientationchange", this._resize);
     };
 
     // ===================== PUBLIC API =====================
