@@ -10,4 +10,4 @@ images:
     caption: "2025 / 4.25x5.5 in / Zine of bilingual poem in spanish and english."
 ---
 
-With a shift towards writing and printed media, I have begun to make zines in 2025 with the self-publication of the bilingual poem Cuestiones Rorschach.
+Self-published zines including drawings and poetry.
