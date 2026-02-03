@@ -30,6 +30,8 @@ from pathlib import Path
 from datetime import date
 from typing import Optional, Tuple, Dict, List
 
+import markdown
+
 
 def parse_frontmatter(content: str) -> Tuple[dict, str]:
     """
@@ -361,10 +363,25 @@ def generate_project_html(project: dict, projects: dict, template: str, base_pat
         generate_article_html(project, projects, article_template, base_path)
 
 
+def generate_about_content(base_path: Path) -> str:
+    """
+    Read about.md and convert it to HTML using the markdown library.
+    """
+    about_md_path = base_path / 'about.md'
+    if not about_md_path.exists():
+        print(f"Warning: about.md not found at {about_md_path}")
+        return ''
+
+    md_content = about_md_path.read_text(encoding='utf-8')
+    md = markdown.Markdown(extensions=['tables', 'attr_list'])
+    return md.convert(md_content)
+
+
 def generate_standalone_page(template_name: str, projects: dict, base_path: Path) -> None:
     """
     Generate a standalone page (index.html, about.html) from its template.
     Replaces {{NAV_MENU}} with dynamically generated navigation HTML.
+    For about.html, also reads about.md and injects converted HTML content.
     """
     template_path = base_path / 'templates' / template_name
     if not template_path.exists():
@@ -374,6 +391,10 @@ def generate_standalone_page(template_name: str, projects: dict, base_path: Path
     template = template_path.read_text(encoding='utf-8')
     nav_html = generate_nav_html(projects)
     html = template.replace('{{NAV_MENU}}', nav_html)
+
+    if template_name == 'about.html':
+        about_html = generate_about_content(base_path)
+        html = html.replace('{{ABOUT_CONTENT}}', about_html)
 
     output_path = base_path / template_name
     output_path.write_text(html, encoding='utf-8')

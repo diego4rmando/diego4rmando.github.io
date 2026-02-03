@@ -60,7 +60,7 @@ Date: 2017-2-27 */
 	padding:50px;
 }
 #about ul{
-	list-style-type: "";
+	list-style-type: "- ";
 }
 #portrait{
 
@@ -353,11 +353,14 @@ a:active {
 		padding-bottom: 20px;
 	}
 
-	/* Table scroll on small screens */
+	/* Table: allow wrapping on small screens */
 	#content table {
-		display: block;
-		overflow-x: auto;
-		white-space: nowrap;
+		display: table;
+		max-width: 100%;
+		white-space: normal;
+		word-break: break-word;
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
 	}
 
 	/* Gallery grid: 2 columns on mobile */
