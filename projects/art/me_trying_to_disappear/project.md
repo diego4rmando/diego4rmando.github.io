@@ -18,4 +18,4 @@ images:
     caption: "2013 / 20x24 in / video"
 ---
 
-This series of video and installation works explore the nature of existence and non-existence. In the pieces, various forms of failed disappearance are attempted. From sitting still for a program to mask the bits of a sitter in front of the camera, to a set of positive and negative images attempting to cancel each other out, to a runner trying to run fast enough to pass through the frame without being caught by the camera, in trying to avoid representation and thus disappear, the subject represented plays with the notion of reality and presence.
+A series of video and installations exploring the nature of existence and non-existence. In the pieces, various forms of failed disappearance are attempted: from sitting still for a program to mask the bits of a sitter's image in front of the camera to a set of positive and negative images attempting to cancel each other out, to a runner trying to run fast enough to pass through the frame without being caught by the camera. In trying to avoid representation and thus disappear, the subject represented plays with the notion of reality and presence.
