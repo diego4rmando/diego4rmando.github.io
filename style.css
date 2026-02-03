@@ -60,7 +60,7 @@ Date: 2017-2-27 */
 	padding:50px;
 }
 #about ul{
-	list-style-type: "- ";
+	list-style-type: "";
 }
 #portrait{
 
@@ -92,25 +92,6 @@ overflow: visible;
     color: rgb(150, 150, 150);
     font-family: "helvetica";
     font-size:12px;
-}
-#caption_container{
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
-	font-size: 10pt;
-	position:absolute;
-	padding-top:5px;
-	left:110px;
-	right:100px;
-}
-#caption{
-	cursor: pointer;
-	text-align:center;
-}
-#caption_text{
-	display:none;
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
-	font-size: 10pt;
 }
 /* Content containing Images, Captions, and Text */
 #content{
@@ -193,13 +174,6 @@ a:active {
 }
 #file_link{
 	text-decoration: underline;
-}
-#index_image{
-	position: absolute;
-	height:80%;
-	width:80%;
-	top:10%;
-	left:10%;
 }
 
 /* Three-body simulation canvas (front page background) */
@@ -355,13 +329,6 @@ a:active {
 
 	#education_work {
 		width: 100%;
-	}
-
-	#caption_container {
-		position: relative;
-		left: auto;
-		right: auto;
-		padding: 5px 0;
 	}
 
 	#project_body {

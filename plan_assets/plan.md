@@ -165,13 +165,13 @@ Build in layers, testing each before moving to the next:
 - [x] Clean up any remaining accordion artifacts (stale generated HTML files with old accordion code — regenerate to fix)
 - [x] Remove `epicycles_article.html` (stale hand-crafted file; article content has been migrated to the GitHub repo and linked from the project description)
 
-## Phase 4: Final Tuning & Testing
-- [ ] Tune body colors, trail colors, glow intensity, and background gradient palette
-- [ ] Tune simulation speed and trail length for visual appeal
-- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
-- [ ] Mobile device testing (iOS Safari, Android Chrome)
-- [ ] Remove unused legacy files (jQuery UI directory already removed in 3c; check for other old assets)
-- [ ] Final review of all generated pages for consistency
+## Phase 4: Final Tuning & Testing ✅
+- [x] Tune body colors, trail colors, glow intensity, and background gradient palette
+- [x] Tune simulation speed and trail length for visual appeal
+- [x] Cross-browser testing (Chrome, Firefox, Safari, Edge)
+- [x] Mobile device testing (iOS Safari, Android Chrome)
+- [x] Remove unused legacy files (jQuery UI directory already removed in 3c; check for other old assets)
+- [x] Final review of all generated pages for consistency
 
 
 # References
