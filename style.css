@@ -254,30 +254,54 @@ a:active {
 }
 
 /* ---- Mobile Responsive ---- */
+/* Mobile index page: menu at bottom */
+
 @media screen and (max-width: 768px) {
 	/* Menu: switch from fixed sidebar to top of page */
 	#menu {
 		position: relative;
 		width: 100%;
 		right: auto;
-		top: 0px;
+		top: 20px;
 		text-align: center;
 		margin: 0;
 		box-sizing: border-box;
 	}
-
+	.page-index #menu {
+		position: fixed;
+		bottom: 50px;
+		top: auto;
+		left: 0;
+		right: 0;
+	}
 	/* Artist name: relative position, centered, constrained width to force two-line wrap */
 	#ARTIST_NAME {
 		position: relative;
 		width: 100%;
 		max-width: 200px;
+		top: 10px;
 		left: auto;
 		bottom: auto;
 		text-align: center;
 		padding: 10px 0;
 		margin: 0 auto;
 	}
-
+	/* Special handling of index page*/ 
+	.page-index #site_nav {
+		font-size: 20pt;
+	}
+	.page-index #ARTIST_NAME {
+			position: fixed;
+			left: 0px;
+			right: 0px;
+			top: 30px;
+			bottom: auto;
+			width: auto;
+			max-width: none;
+			white-space: nowrap;
+			font-size: 20pt;
+			text-align: center;
+	}
 	/* Content: full width, no left offset */
 	#content {
 		position: relative;

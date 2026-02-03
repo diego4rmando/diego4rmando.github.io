@@ -20,7 +20,7 @@ article: "true"
 ---
 
 <p>
-For this project I created a python script that inputs an SVG file of curves illustrating an object and calculates the epicycle approximation of those curves. Then the script outputs a gif animating this epicycle approximation. You can see how this works in the README and the script in my github repo:
+The epicyclificator is a python script that calculates epicycle approximations of arbitrary closed curves to create epicycle animations that "illustrate" and "erase" any input drawing. This is achieved  by taking in svg drawings, calculating an epicycle approximation for each closed curve and generating a gif animation of the epicycle motions. You can see how this works in the README and the script in my github repo:
 
 <a href="https://github.com/diego4rmando/epicycles" id="file_link">epicycles</a>
 

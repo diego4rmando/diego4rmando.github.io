@@ -10,4 +10,4 @@ images:
     caption: "2025 / 4.25x5.5 in / Zine of bilingual poem in spanish and english."
 ---
 
-Self-published zines including drawings and poetry.
+Self-published zine including drawings and poetry.
