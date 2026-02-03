@@ -60,7 +60,7 @@ Date: 2017-2-27 */
 	padding:50px;
 }
 #about ul{
-	list-style-type: "- ";
+	list-style-type: "";
 }
 #portrait{
 
@@ -174,13 +174,6 @@ a:active {
 }
 #file_link{
 	text-decoration: underline;
-}
-#index_image{
-	position: absolute;
-	height:80%;
-	width:80%;
-	top:10%;
-	left:10%;
 }
 
 /* Three-body simulation canvas (front page background) */
@@ -336,13 +329,6 @@ a:active {
 
 	#education_work {
 		width: 100%;
-	}
-
-	#caption_container {
-		position: relative;
-		left: auto;
-		right: auto;
-		padding: 5px 0;
 	}
 
 	#project_body {

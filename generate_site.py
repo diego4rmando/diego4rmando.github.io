@@ -348,6 +348,7 @@ def generate_project_html(project: dict, projects: dict, template: str, base_pat
 
     # Replace placeholders in template
     html = template
+    html = html.replace('{{PROJECT_TITLE}}', project.get('title', ''))
     html = html.replace('{{NAV_MENU}}', nav_html)
     html = html.replace('{{GALLERY_IMAGES}}', gallery_html)
     html = html.replace('{{PROJECT_BODY}}', body_html)
