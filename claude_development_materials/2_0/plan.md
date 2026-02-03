@@ -175,5 +175,23 @@ Build in layers, testing each before moving to the next:
 
 
 # References
+
+## General
 * https://en.wikipedia.org/wiki/Three-body_problem
 * https://en.wikipedia.org/wiki/Central_configuration
+
+## Periodic Three-Body Orbits — Research Papers
+* Šuvakov & Dmitrašinović (2013). "Three Classes of Newtonian Three-Body Planar Periodic Orbits." Physical Review Letters 110, 114301. https://arxiv.org/abs/1303.0181
+* Šuvakov & Dmitrašinović (2014). "A guide to hunting periodic three-body orbits." American Journal of Physics 82(6). http://suki.ipb.ac.rs/AJP_Suvakov_Dmitrasinovic.pdf
+* Li & Liao (2017). "More than six hundred new families of Newtonian periodic planar collisionless three-body orbits." Science China Physics 60. https://link.springer.com/article/10.1007/s11433-017-9078-5
+
+## Periodic Orbit Databases & Visualizations
+* Three-Body Gallery (Belgrade): http://three-body.ipb.ac.rs/
+* SJTU Three-Body Database (695+ families): https://github.com/sjtu-liao/three-body
+* Princeton WebGL Visualization (Vanderbei): https://vanderbei.princeton.edu/WebGL/Suki.html
+* Observable Notebook (Reusser): https://observablehq.com/@rreusser/periodic-planar-three-body-orbits
+* Interactive N-Body Simulator: https://trisolarchaos.com/
+
+## Initial Conditions
+All choreography orbits use equal masses (m=1, G=1) with initial positions at (-1,0), (1,0), (0,0).
+The third body's velocity is the negative sum of the first two bodies' velocities to ensure zero total momentum.

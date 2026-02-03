@@ -263,8 +263,8 @@ var ThreeBodyRenderer = (function () {
             }
         }
 
-        // Background gradient
-        var gradColors = getGradientColors(timestamp || Date.now());
+        // Background gradient (uses Date.now() for global time alignment across page loads)
+        var gradColors = getGradientColors(Date.now());
         drawGradient(ctx, w, h, gradColors);
 
         // Compute brightness adjustment: darken bodies/trails on light backgrounds
