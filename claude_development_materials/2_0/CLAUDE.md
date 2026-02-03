@@ -42,14 +42,12 @@ projects/{category}/{project_id}/project.md  →  generate_site.py  →  {projec
 ### Template Placeholders
 
 Common across templates:
-- `{{ACCORDION_MENU}}` — nested sidebar menu HTML for all categories/projects
-- `{{MOBILE_NAV}}` — simplified mobile navigation links
-- `{{ACCORDION_ACTIVE}}` — 0-indexed integer for which accordion section to expand
+- `{{NAV_MENU}}` — site navigation HTML (category gallery links + About)
 - `{{EXTRA_HEAD}}` — optional script includes (e.g., MathJax when LaTeX detected)
 
 ### Frontend Libraries (in `js/`)
 
-- jQuery, jQuery UI 1.12.1 (accordion widget), Galleria 1.4.7 (image carousel), MathJax 2.7.5 (optional, loaded dynamically)
+- jQuery, Galleria 1.4.7 (image carousel), MathJax 2.7.5 (optional, loaded dynamically)
 
 ## Adding a New Project
 
@@ -63,7 +61,7 @@ Common across templates:
 ```yaml
 ---
 title: "Project Title"
-date: 2024
+date: 2024-01-15
 description: "Short description for galleries"
 thumbnail: "thumbnail.png"
 article: "true"          # optional — triggers article page generation

@@ -59,6 +59,9 @@ Date: 2017-2-27 */
 
 	padding:50px;
 }
+#about ul{
+	list-style-type: "";
+}
 #portrait{
 
 	width:300px;
@@ -89,25 +92,6 @@ overflow: visible;
     color: rgb(150, 150, 150);
     font-family: "helvetica";
     font-size:12px;
-}
-#caption_container{
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
-	font-size: 10pt;
-	position:absolute;
-	padding-top:5px;
-	left:110px;
-	right:100px;
-}
-#caption{
-	cursor: pointer;
-	text-align:center;
-}
-#caption_text{
-	display:none;
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
-	font-size: 10pt;
 }
 /* Content containing Images, Captions, and Text */
 #content{
@@ -191,12 +175,15 @@ a:active {
 #file_link{
 	text-decoration: underline;
 }
-#index_image{
-	position: absolute;
-	height:80%;
-	width:80%;
-	top:10%;
-	left:10%;
+
+/* Three-body simulation canvas (front page background) */
+#three_body_canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
 }
 
 /* Site navigation links */
@@ -211,6 +198,20 @@ a:active {
 #site_nav a {
 	display: inline;
 	margin: 5px;
+}
+
+/* ---- Index Page Color Overrides ---- */
+.page-index #ARTIST_NAME,
+.page-index #ARTIST_NAME a {
+		color: rgb(161, 154, 146);
+	/* color: rgb(230, 227, 222); Warm gray */
+	/* color: rgb(226, 231, 238); Cool gray */
+}
+.page-index #site_nav,
+.page-index #site_nav a {
+	/* color: rgb(150, 150, 150); */
+	/* color: rgb(154, 163, 173); */
+	color: rgb(161, 154, 146);
 }
 
 /* ---- Gallery Page ---- */
@@ -253,30 +254,54 @@ a:active {
 }
 
 /* ---- Mobile Responsive ---- */
+/* Mobile index page: menu at bottom */
+
 @media screen and (max-width: 768px) {
 	/* Menu: switch from fixed sidebar to top of page */
 	#menu {
 		position: relative;
 		width: 100%;
 		right: auto;
-		top: 0px;
+		top: 20px;
 		text-align: center;
 		margin: 0;
 		box-sizing: border-box;
 	}
-
+	.page-index #menu {
+		position: fixed;
+		bottom: 50px;
+		top: auto;
+		left: 0;
+		right: 0;
+	}
 	/* Artist name: relative position, centered, constrained width to force two-line wrap */
 	#ARTIST_NAME {
 		position: relative;
 		width: 100%;
 		max-width: 200px;
+		top: 10px;
 		left: auto;
 		bottom: auto;
 		text-align: center;
 		padding: 10px 0;
 		margin: 0 auto;
 	}
-
+	/* Special handling of index page*/ 
+	.page-index #site_nav {
+		font-size: 20pt;
+	}
+	.page-index #ARTIST_NAME {
+			position: fixed;
+			left: 0px;
+			right: 0px;
+			top: 30px;
+			bottom: auto;
+			width: auto;
+			max-width: none;
+			white-space: nowrap;
+			font-size: 20pt;
+			text-align: center;
+	}
 	/* Content: full width, no left offset */
 	#content {
 		position: relative;
@@ -330,26 +355,24 @@ a:active {
 		width: 100%;
 	}
 
-	#caption_container {
-		position: relative;
-		left: auto;
-		right: auto;
-		padding: 5px 0;
-	}
-
 	#project_body {
 		position: relative;
 		top: auto;
 		left: auto;
-		margin-top: 60px;
+		margin-top: 20px;
 		padding-bottom: 20px;
+		padding-top: 10px;
+		padding-left: 20px;
 	}
 
-	/* Table scroll on small screens */
+	/* Table: allow wrapping on small screens */
 	#content table {
-		display: block;
-		overflow-x: auto;
-		white-space: nowrap;
+		display: table;
+		max-width: 100%;
+		white-space: normal;
+		word-break: break-word;
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
 	}
 
 	/* Gallery grid: 2 columns on mobile */

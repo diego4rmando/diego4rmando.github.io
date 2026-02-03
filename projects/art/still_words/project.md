@@ -26,4 +26,4 @@ images:
     caption: "2015 / 16x20 in / poster on semi-gloss paper"
 ---
 
-Still Words is a series of photographic works containing drawn poems in which banal moments become surreal reflections of our mental states and the endless flow of traffic circulating our human minds.
+A series of photographic works containing drawn poems.

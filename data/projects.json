@@ -1,5 +1,5 @@
 {
-  "generated": "2026-01-29",
+  "generated": "2026-02-03",
   "projects": {
     "art": [
       {
@@ -9,7 +9,7 @@
         "description": "Zines made beggining in 2025.",
         "thumbnail": "projects/art/zines/Diego4rma_gmail_CuestionesRorschach.png",
         "category": "art",
-        "body": "With a shift towards writing and printed media, I have begun to make zines in 2025 with the self-publication of the bilingual poem Cuestiones Rorschach.",
+        "body": "Self-published zine including drawings and poetry.",
         "has_article": false,
         "images": [
           {
@@ -45,7 +45,7 @@
         "description": "A series of photographic works containing drawn poems where banal moments become surreal reflections of our mental states.",
         "thumbnail": "projects/art/still_words/Diego4rma_gmail_SunkUnder.jpg",
         "category": "art",
-        "body": "Still Words is a series of photographic works containing drawn poems in which banal moments become surreal reflections of our mental states and the endless flow of traffic circulating our human minds.",
+        "body": "A series of photographic works containing drawn poems.",
         "has_article": false,
         "images": [
           {
@@ -87,7 +87,7 @@
         "description": "Multiple artworks including computer-drawn images, sculptures, and music created using a defined counting pattern.",
         "thumbnail": "projects/art/count_loop/diego4rma_gmail_gradient_count.gif",
         "category": "art",
-        "body": "In this series, multiple pieces are created as manifestations of the same pattern defined by a simple mathematical framework that generates complexity from the inherent qualities of integer numbers. Multiple types of artworks including computer-drawn images, sculptures, and music are created using a defined counting pattern. The visual, physical and auditory results have common qualities, and reveal concepts of number theory in different ways.\n\nIn Gradient, repeating patterns can be found at rates consistent with the least common multiple of the row numbers. These same rates can also be found in Towers in which tower height patterns repeat, and in Note Scale, note patterns repeat at set rates for the duration of the piece. When installed, the pieces collectively span one pattern loop which transitions from one medium to the next.",
+        "body": "Multiple pieces manifesting the same pattern defined by a simple mathematical framework that generates complexity from the inherent qualities of integer numbers. The series invludes multiple types of artworks including computer-drawn images, sculptures, and music. The visual, physical and auditory results have common qualities and reveal concepts of number theory. In \"Gradient\", repeating patterns can be found at rates consistent with the least common multiple of the row numbers. These same rates can also be found in \"Towers\" in which tower height patterns of wooden blocks repeat. In Note Scale, note patterns repeat at set rates for the duration of the piece. When installed, the pieces collectively span one pattern loop which transitions from one medium to the next.",
         "has_article": false,
         "images": [
           {
@@ -117,7 +117,7 @@
         "description": "Video and installation works exploring the nature of existence and non-existence through various forms of failed disappearance.",
         "thumbnail": "projects/art/me_trying_to_disappear/Diego4rma_gmail_MTTD_2.jpg",
         "category": "art",
-        "body": "This series of video and installation works explore the nature of existence and non-existence. In the pieces, various forms of failed disappearance are attempted. From sitting still for a program to mask the bits of a sitter in front of the camera, to a set of positive and negative images attempting to cancel each other out, to a runner trying to run fast enough to pass through the frame without being caught by the camera, in trying to avoid representation and thus disappear, the subject represented plays with the notion of reality and presence.",
+        "body": "A series of video and installations exploring the nature of existence and non-existence. In the pieces, various forms of failed disappearance are attempted: from sitting still for a program to mask the bits of a sitter's image in front of the camera to a set of positive and negative images attempting to cancel each other out, to a runner trying to run fast enough to pass through the frame without being caught by the camera. In trying to avoid representation and thus disappear, the subject represented plays with the notion of reality and presence.",
         "has_article": false,
         "images": [
           {
@@ -144,7 +144,7 @@
         "id": "miscellaneous_photography",
         "title": "Miscellaneous Photography",
         "date": "2012",
-        "description": "A collection of photographic works including gelatin silver prints and digital prints.",
+        "description": "A collection of photographic works including gelatin silver and digital prints.",
         "thumbnail": "projects/art/miscellaneous_photography/Diego4rma_gmail_Cayuga_1.jpg",
         "category": "art",
         "body": "A collection of photographic works spanning various subjects and techniques.",
@@ -237,7 +237,7 @@
         "description": "A commissioned show documenting the construction of Milstein Hall from the perspective of a student.",
         "thumbnail": "projects/art/construct/Diego4rma_gmail_Banded.jpg",
         "category": "art",
-        "body": "Construct was a show for which Michelle Chen and I were commissioned as Fine Arts students by the Dean of the College of Architecture, Art and Planning at Cornell University. The purpose of the project was to document the construction of Milstein Hall from the perspective of a student and to think about what this building could mean to those who would inhabit it. This was the first show installed in the Milstein Hall Gallery when the building opened.\n\nAs a part of this show I created a series of photographs overlaying images of the AAP campus taken by students from the early 19th century, with contemporary images at the exact same locations during the construction of Milstein Hall. In this way the past and present were forced into interaction, each at transformational moments, creating an anachronistic space in which the past and present can talk and reveal their similarities and differences.\n\nIn another series of photographs I overlaid images of different rooms at various stages of the building's construction. This was done by creating digital prints of the images on clear film and framing them together, but separating them with pieces of plexiglass to create an image that was physically layered creating a sense of stacked but distinguishable moments in time.",
+        "body": "Construct was a show for which Michelle Chen and I were commissioned as Fine Arts students by the Dean of the College of Architecture, Art and Planning at Cornell University. The purpose of the project was to document the construction of Milstein Hall, the new building for the School of Architecture, from the perspective of a student and to think about what this building could mean to those who would inhabit it. This was the first show installed in the Milstein Hall Gallery when the building opened.\n\nAs a part of this show I created a series of photographs overlaying images of the AAP campus taken by students from the early 19th century, with contemporary images at the exact same locations during the construction of Milstein Hall. In this way the past and present were forced into interaction, each at transformational moments, creating an anachronistic space in which the past and present can talk and reveal their similarities and differences.\n\nIn another series of photographs I overlaid images of different rooms at various stages of the building's construction. This was done by creating digital prints of the images on clear film and framing them together, but separating them with pieces of plexiglass to create an image that was physically layered creating a sense of stacked but distinguishable moments in time.",
         "has_article": false,
         "images": [
           {
@@ -303,7 +303,7 @@
         "description": "Works exploring the role of computation, order and randomness in the process of creation.",
         "thumbnail": "projects/art/discrete_nature/Diego4rma_gmail_Discrete_Nature_1.jpg",
         "category": "art",
-        "body": "In these works, a series of unique images were created using a MATLAB program that generates figures using a given set of rules and random numbers. Every time the program is run, a new image is generated. The creation of these images comments on the necessity of both order and randomness in the process of creation by either a purposeful actor as a human or by nature itself. The pieces also involve the role of computation as a tool for direct or indirect creation and the exploration of what is authored and what is not, of what is fabricated and what is natural.",
+        "body": "Sculptures containing unique images created using a MATLAB program that generates figures using a given set of rules and random numbers. The creation of these images utilizes both order and randomness in the process of creation to create families of related images. The pieces involve the role of computation as a tool for direct or indirect creation and the exploration of what is authored and what is not, of what is fabricated and what is natural.",
         "has_article": false,
         "images": [
           {
@@ -335,7 +335,7 @@
         "description": "A Python script that takes an SVG file and produces a GIF animation of epicycles approximating each closed curve in the SVG.",
         "thumbnail": "projects/tech/epicycles/mano.gif",
         "category": "tech",
-        "body": "<p>\nFor this project I created a python script that inputs an SVG file of curves illustrating an object and calculates the epicycle approximation of those curves. Then the script outputs a gif animating this epicycle approximation. You can see how this works in the README and the script in my github repo:\n\n<a href=\"https://github.com/diego4rmando/epicycles\" id=\"file_link\">epicycles</a>\n\n</p>",
+        "body": "<p>\nThe epicyclificator is a python script that calculates epicycle approximations of arbitrary closed curves to create epicycle animations that \"illustrate\" and \"erase\" any input drawing. This is achieved  by taking in svg drawings, calculating an epicycle approximation for each closed curve and generating a gif animation of the epicycle motions. You can see how this works in the README and the script in my github repo:\n\n<a href=\"https://github.com/diego4rmando/epicycles\" id=\"file_link\">epicycles</a>\n\n</p>",
         "has_article": true,
         "images": [
           {

@@ -42,7 +42,7 @@ images:
     caption: "2011 / 24x36 in / aluminum frame, plexiglass, fluorescent lights, digital transparent print / Part of Construct, the first show at the Cornell AAP Milstein Hall Gallery"
 ---
 
-Construct was a show for which Michelle Chen and I were commissioned as Fine Arts students by the Dean of the College of Architecture, Art and Planning at Cornell University. The purpose of the project was to document the construction of Milstein Hall from the perspective of a student and to think about what this building could mean to those who would inhabit it. This was the first show installed in the Milstein Hall Gallery when the building opened.
+Construct was a show for which Michelle Chen and I were commissioned as Fine Arts students by the Dean of the College of Architecture, Art and Planning at Cornell University. The purpose of the project was to document the construction of Milstein Hall, the new building for the School of Architecture, from the perspective of a student and to think about what this building could mean to those who would inhabit it. This was the first show installed in the Milstein Hall Gallery when the building opened.
 
 As a part of this show I created a series of photographs overlaying images of the AAP campus taken by students from the early 19th century, with contemporary images at the exact same locations during the construction of Milstein Hall. In this way the past and present were forced into interaction, each at transformational moments, creating an anachronistic space in which the past and present can talk and reveal their similarities and differences.
 
