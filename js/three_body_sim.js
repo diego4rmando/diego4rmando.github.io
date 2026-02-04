@@ -5,7 +5,7 @@
 // Provides initial conditions for several periodic solution families:
 //   1. Figure-eight choreography (Moore / Chenciner-Montgomery)
 //   2. Moth choreographies (Šuvakov & Dmitrašinović, 2013)
-//   3. Broucke flower orbits (Broucke, 1975) — stable petal patterns
+//   3. BHH satellite orbits (Broucke-Hadjidemetriou-Hénon family)
 //   4. Hierarchical triple (tight binary + wide outer orbit)
 //   5. Euler collinear orbit
 
@@ -69,6 +69,24 @@ var ThreeBodySim = (function () {
                 [0.43917, 0.45297],
                 [0.43917, 0.45297],
                 [-0.87834, -0.90594]
+            ]
+        },
+
+        // BHH Satellite orbit (Broucke-Hadjidemetriou-Hénon family)
+        // Two bodies dash back and forth inside while the third orbits outside.
+        // Collinear start with perpendicular velocities. Period T ≈ 6.879.
+        bhhSatellite: {
+            name: "BHH Satellite",
+            masses: [1, 1, 1],
+            positions: [
+                [-1.609965115714630, 0.0],
+                [1.0, 0.0],
+                [0.0, 0.0]
+            ],
+            velocities: [
+                [0.0, -0.6656909425824538],
+                [0.0, -0.1529561125709906],
+                [0.0, 0.8186470951534444]
             ]
         },
 
@@ -327,25 +345,25 @@ var ThreeBodySim = (function () {
         // producing a pulsating rosette — bodies expand to ~2.6× their
         // initial distance once per revolution while staying collinear.
         // Base: omega^2 = G*m*5/(4d^3), d=1, m=1; velocities scaled by 1.20.
-        euler: (function () {
-            var m = 1;
-            var d = 1;
-            var vScale = 1.20;
-            var omega = Math.sqrt(G * m * 5 / (4 * d * d * d));
-            return {
-                name: "Euler",
-                masses: [m, m, m],
-                positions: [
-                    [-d, 0],
-                    [0, 0],
-                    [d, 0]
-                ],
-                velocities: [
-                    [0, -omega * d * vScale],
-                    [0, 0],
-                    [0, omega * d * vScale]
-                ]
-            };
+        // euler: (function () {
+        //     var m = 1;
+        //     var d = 1;
+        //     var vScale = 1.20;
+        //     var omega = Math.sqrt(G * m * 5 / (4 * d * d * d));
+        //     return {
+        //         name: "Euler",
+        //         masses: [m, m, m],
+        //         positions: [
+        //             [-d, 0],
+        //             [0, 0],
+        //             [d, 0]
+        //         ],
+        //         velocities: [
+        //             [0, -omega * d * vScale],
+        //             [0, 0],
+        //             [0, omega * d * vScale]
+        //         ]
+        //     };
         })()
     };
 
@@ -389,9 +407,9 @@ var ThreeBodySim = (function () {
                 var dy = state[posIdx(j) + 1] - yi;
                 var r2 = dx * dx + dy * dy;
                 var r = Math.sqrt(r2);
-                var f = G * masses[j] / (r2 * r);
-                ax += f * dx;
-                ay += f * dy;
+                var aOverR = G * masses[j] / (r2 * r);  // a/r: multiply by displacement to get acceleration
+                ax += aOverR * dx;
+                ay += aOverR * dy;
             }
             ds[velIdx(i)]     = ax;
             ds[velIdx(i) + 1] = ay;
@@ -427,7 +445,8 @@ var ThreeBodySim = (function () {
 
     // ---------- Simulation Object ----------
 
-    function Simulation(configKey) {
+    function Simulation(configKey, options) {
+        options = options || {};
         if (!configKey) {
             configKey = CONFIG_KEYS[Math.floor(Math.random() * CONFIG_KEYS.length)];
         }
@@ -438,12 +457,18 @@ var ThreeBodySim = (function () {
         this.state = createState(config);
         this.time = 0;
         this.dt = 0.001; // default timestep (0.001 for numerical stability)
+
+        // Energy drift monitoring
+        this.energyDriftThreshold = options.energyDriftThreshold || 0.01; // 1% default
+        this.initialEnergy = this.totalEnergy();
+        this.resetCount = 0;
     }
 
     Simulation.prototype.step = function (dt) {
         dt = dt || this.dt;
         this.state = rk4Step(this.state, this.masses, dt);
         this.time += dt;
+        this._checkEnergyDrift();
     };
 
     // Advance by a given amount of time using multiple fixed-size steps
@@ -454,6 +479,7 @@ var ThreeBodySim = (function () {
             this.state = rk4Step(this.state, this.masses, stepDt);
         }
         this.time += totalDt;
+        this._checkEnergyDrift();
     };
 
     Simulation.prototype.getPositions = function () {
@@ -488,6 +514,24 @@ var ThreeBodySim = (function () {
         return KE + PE;
     };
 
+    // Check energy drift and reset if threshold exceeded
+    Simulation.prototype._checkEnergyDrift = function () {
+        var currentEnergy = this.totalEnergy();
+        var drift = Math.abs((currentEnergy - this.initialEnergy) / this.initialEnergy);
+        if (drift > this.energyDriftThreshold) {
+            this.reset();
+            this.resetCount++;
+            return true;
+        }
+        return false;
+    };
+
+    // Get current energy drift as a fraction
+    Simulation.prototype.getEnergyDrift = function () {
+        var currentEnergy = this.totalEnergy();
+        return (currentEnergy - this.initialEnergy) / this.initialEnergy;
+    };
+
     // Reset simulation to initial conditions
     Simulation.prototype.reset = function (configKey) {
         if (configKey) {
@@ -500,6 +544,7 @@ var ThreeBodySim = (function () {
             this.state = createState(CONFIGS[this.configKey]);
         }
         this.time = 0;
+        this.initialEnergy = this.totalEnergy();
     };
 
     // ---------- Public API ----------

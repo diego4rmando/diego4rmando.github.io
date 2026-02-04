@@ -30,8 +30,6 @@ The simulation uses real-time Newtonian gravity integration (4th-order Runge-Kut
 
 The three bodies are purely visual/decorative — they do not link to projects. All project navigation happens through the menu.
 
-![Front Page Drawing](drawings_concept.png)
-
 * The __background__ gradient colors functionality will remain as-is for now. These colors may be tuned later.
 * The __three bodies__ are rendered as glowing points with warm colors (gold, orange, red-orange). Their brightness/opacity adjusts with the background to remain visible. These colors may be tuned later so it should be easy to do so.
 * Each body leaves a __fading trail__ of light in its assigned color, showing its recent orbital path. Trails fade to transparent over a configurable number of past positions.
