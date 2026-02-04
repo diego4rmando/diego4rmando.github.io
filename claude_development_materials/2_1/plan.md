@@ -317,17 +317,17 @@ The index template is unaffected — it fades `#ARTIST_NAME` and `#site_nav`, no
 ## Execution Plan
 
 ### Step 1: Update desktop base styles in `style.css`
-- [ ] Update `#content`: `position: absolute` → `relative`, `display: none` → `flex`, add `flex-direction: column; opacity: 0`, `height: 80%` → `auto`, replace `left: 15%; top: 80px` with `margin: 80px 0 0 15%`, add `box-sizing: border-box`
-- [ ] Update `#galleria`: `position: absolute` → `relative`, remove `top: 0%`, replace `left: 5%` with `margin-left: 5%`
-- [ ] Update `#project_body`: remove `top: 580px`, replace `left: 5%` with `margin-left: 5%`, add `margin-top: 45px`, reduce `padding-bottom: 600px` → `40px`
-- [ ] Verify: open a project page on desktop and confirm galleria + text stack correctly
+- [x] Update `#content`: `position: absolute` → `relative`, `display: none` → `flex`, add `flex-direction: column; opacity: 0`, `height: 80%` → `auto`, replace `left: 15%; top: 80px` with `margin: 80px 0 0 15%`, add `box-sizing: border-box`
+- [x] Update `#galleria`: `position: absolute` → `relative`, remove `top: 0%`, replace `left: 5%` with `margin-left: 5%`
+- [x] Update `#project_body`: remove `top: 580px`, replace `left: 5%` with `margin-left: 5%`, add `margin-top: 45px`, reduce `padding-bottom: 600px` → `40px`
+- [x] Verify: open a project page on desktop and confirm galleria + text stack correctly
 
 ### Step 2: Simplify mobile media query in `style.css`
-- [ ] Simplify mobile `#content`: remove properties now inherited from base (flex, relative, auto height), keep only width/margin/padding overrides
-- [ ] Simplify mobile `#galleria`: remove `position: relative; top: auto; left: auto` (inherited from base), keep width/height overrides, add `margin-left: 0; flex-shrink: 0; overflow: hidden`
-- [ ] Simplify mobile `#project_body`: remove `position: relative; top: auto; left: auto` (inherited), keep padding overrides, add `margin-left: 0; max-width: 100%; box-sizing: border-box`
-- [ ] Fix mobile `#ARTIST_NAME`: change `top: 10px` → `top: auto`, change `margin: 0 auto` → `margin: 10px auto 0 auto`
-- [ ] Add mobile `.galleria-theme-classic { overflow: hidden; }`
+- [x] Simplify mobile `#content`: remove properties now inherited from base (flex, relative, auto height), keep only width/margin/padding overrides
+- [x] Simplify mobile `#galleria`: remove `position: relative; top: auto; left: auto` (inherited from base), keep width/height overrides, add `margin-left: 0; flex-shrink: 0; overflow: hidden`
+- [x] Simplify mobile `#project_body`: remove `position: relative; top: auto; left: auto` (inherited), keep padding overrides, add `margin-left: 0; max-width: 100%; box-sizing: border-box`
+- [x] Fix mobile `#ARTIST_NAME`: change `top: 10px` → `top: auto`, change `margin: 0 auto` → `margin: 10px auto 0 auto`
+- [x] Add mobile `.galleria-theme-classic { overflow: hidden; }`
 - [ ] Verify: open a project page at mobile width and confirm no overlap between galleria and project body
 
 ### Step 3: Update template JS (fade-in effect)
