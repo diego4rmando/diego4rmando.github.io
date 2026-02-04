@@ -165,7 +165,6 @@ def load_project(project_path: Path, category: str) -> Optional[dict]:
         'thumbnail': f"{image_base}/{frontmatter.get('thumbnail', '')}",
         'category': category,
         'body': body,
-        'has_article': frontmatter.get('article', '').lower() == 'true',
         'images': []
     }
 
@@ -297,40 +296,9 @@ def generate_gallery_items_html(projects: dict, category: str) -> str:
 
 
 
-def generate_article_html(project: dict, projects: dict, article_template: str, base_path: Path) -> None:
-    """
-    Generate a separate article HTML page for a project that has article content.
-    The article content is read from article.md in the project directory.
-    """
-    article_md = base_path / 'projects' / project['category'] / project['id'] / 'article.md'
-    if not article_md.exists():
-        print(f"Warning: article.md not found for {project['id']}")
-        return
-
-    article_body = article_md.read_text(encoding='utf-8')
-
-    extra_head = ''
-    if '\\[' in article_body or '\\(' in article_body:
-        extra_head = '<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>'
-
-    nav_html = generate_nav_html(projects)
-
-    html = article_template
-    html = html.replace('{{ARTICLE_TITLE}}', project['title'])
-    html = html.replace('{{ARTICLE_BODY}}', article_body)
-    html = html.replace('{{NAV_MENU}}', nav_html)
-    html = html.replace('{{EXTRA_HEAD}}', extra_head)
-
-    output_path = base_path / f"{project['id']}_article.html"
-    output_path.write_text(html, encoding='utf-8')
-    print(f"Generated article: {output_path}")
-
-
-def generate_project_html(project: dict, projects: dict, template: str, base_path: Path,
-                          article_template: Optional[str] = None) -> None:
+def generate_project_html(project: dict, projects: dict, template: str, base_path: Path) -> None:
     """
     Generate an HTML file for a single project.
-    If the project has article: true, also generates a separate article page.
     """
     # Generate gallery HTML
     gallery_html = generate_gallery_html(project)
@@ -358,10 +326,6 @@ def generate_project_html(project: dict, projects: dict, template: str, base_pat
     output_path = base_path / f"{project['id']}.html"
     output_path.write_text(html, encoding='utf-8')
     print(f"Generated: {output_path}")
-
-    # Generate separate article page if this project has one
-    if project.get('has_article') and article_template:
-        generate_article_html(project, projects, article_template, base_path)
 
 
 def generate_about_content(base_path: Path) -> str:
@@ -433,16 +397,10 @@ def generate_all_html(projects: dict, base_path: Path) -> None:
 
     template = template_path.read_text(encoding='utf-8')
 
-    # Load article template if it exists
-    article_template_path = base_path / 'templates' / 'article.html'
-    article_template = None
-    if article_template_path.exists():
-        article_template = article_template_path.read_text(encoding='utf-8')
-
     # Generate project pages
     for category in projects:
         for project in projects[category]:
-            generate_project_html(project, projects, template, base_path, article_template)
+            generate_project_html(project, projects, template, base_path)
 
     # Generate category gallery pages
     gallery_template_path = base_path / 'templates' / 'gallery.html'

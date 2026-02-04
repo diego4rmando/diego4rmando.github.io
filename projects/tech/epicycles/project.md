@@ -16,7 +16,6 @@ images:
     thumb: "cactus.gif"
     title: "Cactus Flowers"
     caption: "2019 / Epicycle approximation of cactus flowers"
-article: "true"
 ---
 
 <p>

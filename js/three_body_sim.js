@@ -5,7 +5,7 @@
 // Provides initial conditions for several periodic solution families:
 //   1. Figure-eight choreography (Moore / Chenciner-Montgomery)
 //   2. Moth choreographies (Šuvakov & Dmitrašinović, 2013)
-//   3. Broucke flower orbits (Broucke, 1975) — stable petal patterns
+//   3. BHH satellite orbits (Broucke-Hadjidemetriou-Hénon family)
 //   4. Hierarchical triple (tight binary + wide outer orbit)
 //   5. Euler collinear orbit
 
@@ -22,20 +22,20 @@ var ThreeBodySim = (function () {
         // Figure-eight choreography (Chenciner & Montgomery, 2000)
         // Three equal masses chase each other around a figure-eight curve.
         // Reference values from Chenciner-Montgomery with G=1, m=1.
-        // figureEight: {
-        //     name: "Figure-Eight",
-        //     masses: [1, 1, 1],
-        //     positions: [
-        //         [-0.97000436, 0.24308753],
-        //         [0.97000436, -0.24308753],
-        //         [0.0, 0.0]
-        //     ],
-        //     velocities: [
-        //         [0.4662036850, 0.4323657300],
-        //         [0.4662036850, 0.4323657300],
-        //         [-0.9324073700, -0.8647314600]
-        //     ]
-        // },
+        figureEight: {
+            name: "Figure-Eight",
+            masses: [1, 1, 1],
+            positions: [
+                [-0.97000436, 0.24308753],
+                [0.97000436, -0.24308753],
+                [0.0, 0.0]
+            ],
+            velocities: [
+                [0.4662036850, 0.4323657300],
+                [0.4662036850, 0.4323657300],
+                [-0.9324073700, -0.8647314600]
+            ]
+        },
 
         // Moth I choreography (Šuvakov & Dmitrašinović, 2013)
         // Three equal masses trace a moth-shaped periodic orbit.
@@ -69,6 +69,24 @@ var ThreeBodySim = (function () {
                 [0.43917, 0.45297],
                 [0.43917, 0.45297],
                 [-0.87834, -0.90594]
+            ]
+        },
+
+        // BHH Satellite orbit (Broucke-Hadjidemetriou-Hénon family)
+        // Two bodies dash back and forth inside while the third orbits outside.
+        // Collinear start with perpendicular velocities. Period T ≈ 6.879.
+        bhhSatellite: {
+            name: "BHH Satellite",
+            masses: [1, 1, 1],
+            positions: [
+                [-1.609965115714630, 0.0],
+                [1.0, 0.0],
+                [0.0, 0.0]
+            ],
+            velocities: [
+                [0.0, -0.6656909425824538],
+                [0.0, -0.1529561125709906],
+                [0.0, 0.8186470951534444]
             ]
         },
 
@@ -389,9 +407,9 @@ var ThreeBodySim = (function () {
                 var dy = state[posIdx(j) + 1] - yi;
                 var r2 = dx * dx + dy * dy;
                 var r = Math.sqrt(r2);
-                var f = G * masses[j] / (r2 * r);
-                ax += f * dx;
-                ay += f * dy;
+                var aOverR = G * masses[j] / (r2 * r);  // a/r: multiply by displacement to get acceleration
+                ax += aOverR * dx;
+                ay += aOverR * dy;
             }
             ds[velIdx(i)]     = ax;
             ds[velIdx(i) + 1] = ay;
