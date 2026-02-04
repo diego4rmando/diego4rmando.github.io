@@ -2,7 +2,7 @@
 title: "Still Words"
 date: 2015
 description: "A series of photographic works containing drawn poems where banal moments become surreal reflections of our mental states."
-thumbnail: "Diego4rma_gmail_SunkUnder.jpg"
+thumbnail: "Diego4rma_gmail_SunkUnder_thumb.jpg"
 images:
   - file: "Diego4rma_gmail_SunkUnder.jpg"
     thumb: "Diego4rma_gmail_SunkUnder_thumb.jpg"
@@ -26,4 +26,4 @@ images:
     caption: "2015 / 16x20 in / poster on semi-gloss paper"
 ---
 
-A series of photographic works containing drawn poems.
+Still Words is a series of photographic works containing drawn poems in which banal moments become surreal reflections of our mental states and the endless flow of traffic circulating our human minds.

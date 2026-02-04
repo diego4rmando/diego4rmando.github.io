@@ -1,8 +1,8 @@
 ---
 title: "Miscellaneous Photography"
 date: 2012
-description: "A collection of photographic works including gelatin silver and digital prints."
-thumbnail: "Diego4rma_gmail_Cayuga_1.jpg"
+description: "A collection of photographic works including gelatin silver prints and digital prints."
+thumbnail: "Diego4rma_gmail_Cayuga_1_thumb.jpg"
 images:
   - file: "Diego4rma_gmail_Cayuga_1.jpg"
     thumb: "Diego4rma_gmail_Cayuga_1_thumb.jpg"

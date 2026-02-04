@@ -2,7 +2,7 @@
 title: "Collage"
 date: 2022
 description: "Digital collage works based on collected images."
-thumbnail: "Diego4rma_gmail_radio_habana.png"
+thumbnail: "Diego4rma_gmail_radio_habana_thumb.png"
 images:
   - file: "Diego4rma_gmail_radio_habana.png"
     thumb: "Diego4rma_gmail_radio_habana_thumb.png"

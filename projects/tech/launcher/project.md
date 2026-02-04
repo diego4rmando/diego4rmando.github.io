@@ -2,7 +2,7 @@
 title: "Mod Bot Launcher"
 date: 2012
 description: "A racquetball launcher designed for a holonomic modular robotics platform to enable robots to catch and throw."
-thumbnail: "launcher_1.jpg"
+thumbnail: "launcher_1_thumb.jpg"
 images:
   - file: "launcher_1.jpg"
     thumb: "launcher_1_thumb.jpg"
