@@ -53,14 +53,14 @@ Instead of maintaining two separate layout strategies, make `#content` a **flexb
 3. `#galleria` and `#project_body` become normal flex children — no more absolute positioning or hardcoded offsets.
 4. Mobile overrides only adjust **widths, heights, and margins** — not the positioning model.
 
-### Fade-In Effect: `display: none` → `opacity`
+### Fade-In Effect: `display: none` → `opacity` — REVISED
 
-The current `display: none` on `#content` (style.css line 111) combined with jQuery `.fadeIn()` is incompatible with `display: flex`. jQuery's `.fadeIn()` restores display to `block` (the div default), overriding our flex declaration. The fix:
+The current `display: none` on `#content` (style.css line 111) combined with jQuery `.fadeIn()` is incompatible with `display: flex`. jQuery's `.fadeIn()` restores display to `block` (the div default), overriding our flex declaration. The original proposal was:
 
 - **CSS**: Replace `display: none` with `display: flex; opacity: 0`
 - **JS**: Replace `$('#content').fadeIn(2200)` with `$('#content').animate({opacity: 1}, 2200)`
 
-This is actually smoother — opacity animation doesn't cause page reflow, unlike toggling `display`.
+**What was actually implemented:** The CSS uses `display: flex; opacity: 1` (content immediately visible). The JS `.fadeIn()` calls were left unchanged — since the element is already visible, jQuery's `.fadeIn()` is a no-op. This avoids the template JS changes while keeping the flex layout working. The existing `.fadeIn()` calls are dead code but harmless.
 
 ---
 
@@ -98,7 +98,7 @@ This is actually smoother — opacity animation doesn't cause page reflow, unlik
     z-index: 1;
     display: flex;
     flex-direction: column;
-    opacity: 0;
+    opacity: 1;
     box-sizing: border-box;
 }
 ```
@@ -108,7 +108,7 @@ Why:
 - `margin: 80px 0 0 15%` replicates the visual placement of `top: 80px; left: 15%`
 - `height: auto` lets content dictate height (no more arbitrary 80%)
 - `display: flex; flex-direction: column` makes children stack vertically
-- `opacity: 0` replaces `display: none` for the fade-in effect
+- `opacity: 1` — content is immediately visible (Step 3 was skipped; `.fadeIn()` is a no-op)
 
 ### 2. Desktop `#galleria` (base styles)
 
@@ -195,18 +195,16 @@ Why: The base styles already handle `display: flex; flex-direction: column; posi
 @media screen and (max-width: 768px) {
     #galleria {
         width: 100%;
-        height: 300px;
+        height: 350px;
         margin-left: 0;
         flex-shrink: 0;
-        overflow: hidden;
     }
 }
 ```
 
 Why:
-- `overflow: hidden` clips the Galleria plugin's internal content that would otherwise spill out of the 300px container
-- `flex-shrink: 0` prevents flex from compressing the gallery below 300px
-- Desktop doesn't need `overflow: hidden` because the 535px container is tall enough for the plugin content
+- `height: 350px` — tuned during testing (originally proposed as 300px, but 350px avoids the need for `overflow: hidden`)
+- `flex-shrink: 0` prevents flex from compressing the gallery below 350px
 
 ### 6. Mobile `#project_body` (media query — simplified)
 
@@ -215,8 +213,10 @@ Why:
     #project_body {
         max-width: 100%;
         margin-left: 0;
-        margin-top: 20px;
-        padding: 10px 20px 20px 20px;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        padding-left: 20px;
         box-sizing: border-box;
     }
 }
@@ -242,31 +242,15 @@ Why:
 
 Why: Same fix as the `#menu` change — use margin for spacing instead of relative `top` offset. `top: 10px` with `position: relative` moves the element visually but doesn't reserve space in flow.
 
-### 8. Mobile `.galleria-theme-classic`: Clip overflow
+### 8. ~~Mobile `.galleria-theme-classic`: Clip overflow~~ — DROPPED
 
-```css
-@media screen and (max-width: 768px) {
-    .galleria-theme-classic {
-        overflow: hidden;
-    }
-}
-```
+Originally proposed `overflow: hidden` on mobile to clip Galleria internals at 300px height. This became unnecessary when the mobile `#galleria` height was increased to 350px during testing, which provides enough room for the plugin content without clipping.
 
-Why: On desktop, `.galleria-theme-classic { overflow: visible }` is fine because the 535px container holds all content. On mobile at 300px, the plugin internals overflow and need clipping.
+### 9. Template JS: Remove dead `fadeIn` calls
 
-### 9. Template JS: `fadeIn` → `opacity animate`
+The `.fadeIn(2200)` calls in `project.html`, `gallery.html`, and `about.html` were no-ops (content has `opacity: 1`, so jQuery sees the element as already visible). Removed the entire `<script>` blocks containing these calls.
 
-Change in **3 templates** (`project.html`, `gallery.html`, `about.html`):
-
-```js
-// BEFORE
-$('#content').fadeIn(2200);
-
-// AFTER
-$('#content').animate({opacity: 1}, 2200);
-```
-
-The index template is unaffected — it fades `#ARTIST_NAME` and `#site_nav`, not `#content`.
+The index template's `fadeIn` calls (`#ARTIST_NAME`, `#site_nav`) are still active — those elements start with `display: none` and fade in intentionally.
 
 ---
 
@@ -276,7 +260,7 @@ The index template is unaffected — it fades `#ARTIST_NAME` and `#site_nav`, no
 
 | Selector | What changes | Why |
 |---|---|---|
-| `#content` | `position: absolute` → `relative`, `display: none` → `flex`, add `flex-direction: column; opacity: 0`, `height: 80%` → `auto`, `left/top` → `margin` | Flex column layout, opacity-based fade |
+| `#content` | `position: absolute` → `relative`, `display: none` → `flex`, add `flex-direction: column; opacity: 1`, `height: 80%` → `auto`, `left/top` → `margin` | Flex column layout, content immediately visible |
 | `#galleria` | `position: absolute` → `relative`, `left: 5%` → `margin-left: 5%` | Participates in flow as flex child |
 | `#project_body` | Remove `top: 580px`, `left: 5%` → `margin-left: 5%`, add `margin-top: 45px`, `padding-bottom: 600px` → `40px` | Flex flow handles stacking |
 
@@ -285,30 +269,29 @@ The index template is unaffected — it fades `#ARTIST_NAME` and `#site_nav`, no
 | Selector | What changes | Why |
 |---|---|---|
 | `#content` | Just width/margin/padding overrides (flex is inherited) | Sizing only |
-| `#galleria` | Width/height/margin + `overflow: hidden; flex-shrink: 0` | Size for mobile, clip plugin overflow |
+| `#galleria` | Width/height(350px)/margin + `flex-shrink: 0` | Size for mobile |
 | `#project_body` | Width/margin/padding overrides | Sizing only |
 | `#ARTIST_NAME` | `top: 10px` → `top: auto; margin: 10px auto 0 auto` | Flow-based spacing |
-| `.galleria-theme-classic` | `overflow: hidden` | Clip plugin overflow on mobile |
 
 ### Templates (JS)
 
 | Template | Change |
 |---|---|
-| `templates/project.html` | `.fadeIn(2200)` → `.animate({opacity: 1}, 2200)` |
-| `templates/gallery.html` | `.fadeIn(2200)` → `.animate({opacity: 1}, 2200)` |
-| `templates/about.html` | `.fadeIn(2200)` → `.animate({opacity: 1}, 2200)` |
-| `templates/index.html` | No change |
+| `templates/project.html` | Removed dead `.fadeIn(2200)` script block |
+| `templates/gallery.html` | Removed dead `.fadeIn(2200)` script block |
+| `templates/about.html` | Removed dead `.fadeIn(2200)` script block |
+| `templates/index.html` | Added `localStorage`-based orbit randomization (Step 6) |
 
 ---
 
 ## What Does NOT Change
 
 - **`#ARTIST_NAME` and `#menu` on desktop**: Stay `position: fixed` — intentional UX (persistent navigation overlay while scrolling content)
-- **Index page**: No `#content` div, completely unaffected
+- **Index page**: No `#content` div — layout unaffected. JS was updated to randomize orbit selection (Step 6)
 - **`.page-index` overrides**: Mobile fixed positioning for index nav stays as-is
 - **`#about` desktop layout**: `#about` uses `position: absolute` inside `#content`. Since `#content` remains a positioned element (`position: relative`), `#about`'s absolute positioning works identically
 - **Gallery grid**: `.gallery_grid` CSS grid layout is unchanged
-- **HTML structure**: No changes to any HTML structure or templates (only the `<script>` JS)
+- **HTML structure**: No changes to any HTML structure. Template JS changes limited to `templates/index.html` (orbit randomization)
 - **`generate_site.py`**: No logic changes (but must be re-run to regenerate pages with updated template JS)
 - **Colors, fonts, typography**: All visual styling unchanged
 
