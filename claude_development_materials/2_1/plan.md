@@ -354,5 +354,13 @@ The fade-in effect change has been intentionally skipped. After testing, the sit
 - [x] **No fade-in**: Content appears immediately on all pages (opacity: 1, no animation)
 - [x] **Galleria interaction**: Image navigation (arrows, thumbnails) works on both desktop and mobile
 
-### Step 6: Commit
-- [ ] Commit all changes with a descriptive message
+### Step 6: Randomize animation on reload (avoid repeats)
+
+Currently, `new ThreeBodySim.Simulation()` picks a random config from 5 options — but there's a 20% chance of getting the same orbit on consecutive page loads. Fix: use `localStorage` to remember the last config and exclude it.
+
+- [x] In `templates/index.html`: before creating the `Simulation`, read the last-used config key from `localStorage`, pick a random *different* key by filtering it out of `ThreeBodySim.CONFIG_KEYS`, pass the chosen key to the `Simulation` constructor, then store it in `localStorage`
+- [x] Regenerate site: run `python generate_site.py` to update the generated `index.html`
+- [x] Test: reload the index page several times and confirm you never see the same orbit twice in a row
+
+### Step 7: Commit
+- [x] Commit all changes with a descriptive message
