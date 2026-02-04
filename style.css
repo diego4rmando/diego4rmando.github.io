@@ -38,19 +38,18 @@ Date: 2017-2-27 */
 }
 /* menu containing list of groups of artworks */
 #menu{
-	margin: 10px;
+	/* margin: 10px; */
 	position: fixed;
 	width:200px;
-	bottom: 70px;
-	left: 20px;
+	top: 70px;
+	right: 20px;
 	z-index:3;
 
 	color: rgb(150, 150, 150);
 	font-family: "helvetica";
-	font-size: 10pt;
+	font-size: 15pt;
 	font-weight: bold;
 	
-	cursor: pointer;
 }
 /* element containing about info */
 #about{
@@ -59,6 +58,9 @@ Date: 2017-2-27 */
 	left:100px;
 
 	padding:50px;
+}
+#about ul{
+	list-style-type: "";
 }
 #portrait{
 
@@ -73,10 +75,6 @@ Date: 2017-2-27 */
 }
 #education_work{
 	width:600px;
-}
-/* accordion containing groups of artworks */
-#Artwork_Accordion h2{
-	outline:none;
 }
 /* element containing galleria jquery*/
 #galleria{
@@ -95,32 +93,13 @@ overflow: visible;
     font-family: "helvetica";
     font-size:12px;
 }
-#caption_container{
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
-	font-size: 10pt;
-	position:absolute;
-	padding-top:5px;
-	left:110px;
-	right:100px;
-}
-#caption{
-	cursor: pointer;
-	text-align:center;
-}
-#caption_text{
-	display:none;
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
-	font-size: 10pt;
-}
 /* Content containing Images, Captions, and Text */
 #content{
 	position: absolute;
 	width: 80%;
 	height: 80%;
 	left: 15%;
-	top: 20px;
+	top: 80px;
 	margin: 5px;
 
 
@@ -130,6 +109,41 @@ overflow: visible;
 	z-index:1;
 
 	display:none;
+}
+/* Project body (article content below gallery) */
+#project_body:empty {
+	display: none;
+}
+#project_body {
+	position: relative;
+	top: 580px;
+	color: rgb(150, 150, 150);
+	font-family: "helvetica";
+	font-size: 10pt;
+	line-height: 1.6;
+	max-width: 730px;
+	left: 5%;
+	padding-bottom: 600px;
+}
+#project_body h1, #project_body h2, #project_body h3 {
+	color: rgb(120, 120, 120);
+}
+#project_body code {
+	background: rgba(150, 150, 150, 0.1);
+	padding: 1px 4px;
+}
+#project_body table {
+	border-collapse: collapse;
+	margin: 10px 0;
+}
+#project_body th, #project_body td {
+	border: 1px solid rgb(100, 100, 100);
+	padding: 5px 10px;
+	text-align: left;
+}
+#project_body img {
+	max-width: 100%;
+	height: auto;
 }
 /* Table containing Group Exhibits */
 #content table{
@@ -161,11 +175,209 @@ a:active {
 #file_link{
 	text-decoration: underline;
 }
-#index_image{
-	position: absolute;
-	height:80%;
-	width:80%;
-	top:10%;
-	left:10%;
 
+/* Three-body simulation canvas (front page background) */
+#three_body_canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+/* Site navigation links */
+#site_nav {
+	display: block;
+	color: rgb(150, 150, 150);
+	font-family: "helvetica";
+	font-size: 15pt;
+	font-weight: bold;
+	text-align: center;
+}
+#site_nav a {
+	display: inline;
+	margin: 5px;
+}
+
+/* ---- Index Page Color Overrides ---- */
+.page-index #ARTIST_NAME,
+.page-index #ARTIST_NAME a {
+		color: rgb(161, 154, 146);
+	/* color: rgb(230, 227, 222); Warm gray */
+	/* color: rgb(226, 231, 238); Cool gray */
+}
+.page-index #site_nav,
+.page-index #site_nav a {
+	/* color: rgb(150, 150, 150); */
+	/* color: rgb(154, 163, 173); */
+	color: rgb(161, 154, 146);
+}
+
+/* ---- Gallery Page ---- */
+#gallery_page {
+	padding: 20px 0;
+}
+.gallery_heading {
+	color: rgb(120, 120, 120);
+	font-family: "helvetica";
+	font-weight: bold;
+	font-size: 14pt;
+	margin-bottom: 20px;
+}
+.gallery_grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 20px;
+}
+.gallery_item {
+	text-align: center;
+}
+.gallery_item a {
+	display: block;
+}
+.gallery_item img {
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+}
+.gallery_item .gallery_item_title {
+	color: rgb(150, 150, 150);
+	font-family: "helvetica";
+	font-size: 9pt;
+	margin-top: 5px;
+}
+.gallery_item .gallery_item_date {
+	color: rgb(180, 180, 180);
+	font-family: "helvetica";
+	font-size: 8pt;
+}
+
+/* ---- Mobile Responsive ---- */
+/* Mobile index page: menu at bottom */
+
+@media screen and (max-width: 768px) {
+	/* Menu: switch from fixed sidebar to top of page */
+	#menu {
+		position: relative;
+		width: 100%;
+		right: auto;
+		top: 20px;
+		text-align: center;
+		margin: 0;
+		box-sizing: border-box;
+	}
+	.page-index #menu {
+		position: fixed;
+		bottom: 50px;
+		top: auto;
+		left: 0;
+		right: 0;
+	}
+	/* Artist name: relative position, centered, constrained width to force two-line wrap */
+	#ARTIST_NAME {
+		position: relative;
+		width: 100%;
+		max-width: 200px;
+		top: 10px;
+		left: auto;
+		bottom: auto;
+		text-align: center;
+		padding: 10px 0;
+		margin: 0 auto;
+	}
+	/* Special handling of index page*/ 
+	.page-index #site_nav {
+		font-size: 20pt;
+	}
+	.page-index #ARTIST_NAME {
+			position: fixed;
+			left: 0px;
+			right: 0px;
+			top: 30px;
+			bottom: auto;
+			width: auto;
+			max-width: none;
+			white-space: nowrap;
+			font-size: 20pt;
+			text-align: center;
+	}
+	/* Content: full width, no left offset */
+	#content {
+		position: relative;
+		width: 100%;
+		height: auto;
+		left: auto;
+		top: auto;
+		margin: 0;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+
+	/* Galleria: responsive width and height */
+	#galleria {
+		position: relative;
+		width: 100%;
+		height: 300px;
+		top: auto;
+		left: auto;
+	}
+
+	/* About page: stack vertically */
+	#about {
+		position: relative;
+		left: auto;
+		top: auto;
+		padding: 10px;
+	}
+
+	#portrait {
+		width: 200px;
+		height: 200px;
+		margin: 0 auto;
+		display: block;
+	}
+
+	#portrait img {
+		width: 100%;
+		height: auto;
+	}
+
+	#about_me {
+		position: relative;
+		top: auto;
+		left: auto;
+		width: 100%;
+		padding: 10px 0;
+	}
+
+	#education_work {
+		width: 100%;
+	}
+
+	#project_body {
+		position: relative;
+		top: auto;
+		left: auto;
+		margin-top: 20px;
+		padding-bottom: 20px;
+		padding-top: 10px;
+		padding-left: 20px;
+	}
+
+	/* Table: allow wrapping on small screens */
+	#content table {
+		display: table;
+		max-width: 100%;
+		white-space: normal;
+		word-break: break-word;
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+	}
+
+	/* Gallery grid: 2 columns on mobile */
+	.gallery_grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
 }
