@@ -2,7 +2,7 @@
 title: "Discrete Nature"
 date: 2009
 description: "Works exploring the role of computation, order and randomness in the process of creation."
-thumbnail: "Diego4rma_gmail_Discrete_Nature_1_thumb.jpg"
+thumbnail: "Diego4rma_gmail_Discrete_Nature_1.jpg"
 images:
   - file: "Diego4rma_gmail_Discrete_Nature_1.jpg"
     thumb: "Diego4rma_gmail_Discrete_Nature_1_thumb.jpg"
