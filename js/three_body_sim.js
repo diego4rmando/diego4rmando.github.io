@@ -364,7 +364,7 @@ var ThreeBodySim = (function () {
         //             [0, omega * d * vScale]
         //         ]
         //     };
-        // })()
+        })()
     };
 
     // List of config keys for random selection (derived automatically from CONFIGS)
