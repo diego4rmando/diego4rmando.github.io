@@ -345,25 +345,25 @@ var ThreeBodySim = (function () {
         // producing a pulsating rosette — bodies expand to ~2.6× their
         // initial distance once per revolution while staying collinear.
         // Base: omega^2 = G*m*5/(4d^3), d=1, m=1; velocities scaled by 1.20.
-        // euler: (function () {
-        //     var m = 1;
-        //     var d = 1;
-        //     var vScale = 1.20;
-        //     var omega = Math.sqrt(G * m * 5 / (4 * d * d * d));
-        //     return {
-        //         name: "Euler",
-        //         masses: [m, m, m],
-        //         positions: [
-        //             [-d, 0],
-        //             [0, 0],
-        //             [d, 0]
-        //         ],
-        //         velocities: [
-        //             [0, -omega * d * vScale],
-        //             [0, 0],
-        //             [0, omega * d * vScale]
-        //         ]
-        //     };
+        euler: (function () {
+            var m = 1;
+            var d = 1;
+            var vScale = 1.20;
+            var omega = Math.sqrt(G * m * 5 / (4 * d * d * d));
+            return {
+                name: "Euler",
+                masses: [m, m, m],
+                positions: [
+                    [-d, 0],
+                    [0, 0],
+                    [d, 0]
+                ],
+                velocities: [
+                    [0, -omega * d * vScale],
+                    [0, 0],
+                    [0, omega * d * vScale]
+                ]
+            };
         })()
     };
 
