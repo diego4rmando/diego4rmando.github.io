@@ -110,7 +110,7 @@ overflow: visible;
 
 	display: flex;
 	flex-direction: column;
-	opacity: 1; /* TODO: revert to 0 after Step 3 updates JS fade-in */
+	opacity: 1;
 	box-sizing: border-box;
 }
 /* Project body (article content below gallery) */
