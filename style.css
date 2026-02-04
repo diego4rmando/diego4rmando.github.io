@@ -262,9 +262,9 @@ a:active {
 		position: relative;
 		width: 100%;
 		right: auto;
-		top: 20px;
+		top: auto;
 		text-align: center;
-		margin: 0;
+		margin: 20px 0 10px 0;
 		box-sizing: border-box;
 	}
 	.page-index #menu {
@@ -359,10 +359,12 @@ a:active {
 		position: relative;
 		top: auto;
 		left: auto;
+		max-width: 100%;
 		margin-top: 20px;
 		padding-bottom: 20px;
 		padding-top: 10px;
 		padding-left: 20px;
+		box-sizing: border-box;
 	}
 
 	/* Table: allow wrapping on small screens */
