@@ -6,12 +6,12 @@ Date: 2017-2-27 */
 /* artist name link */
 #ARTIST_NAME{
 	position: fixed;
-	width:200px;
+	width:300px;
 	height: 50px;
-	left:20px;
-	bottom: 20px;
+	left:25px;
+	bottom: 25px;
 
-	padding:0px 0px;
+	padding:20px 10px;
 	margin: 0px;
 	z-index:3;
 
@@ -20,7 +20,7 @@ Date: 2017-2-27 */
 	text-align: left;
 	font-family: "helvetica";
 	font-weight: bold;
-	font-size: 15pt;
+	font-size: 23pt;
 }
 /* background element (html for now) behind all other elements*/
 #back{
@@ -40,14 +40,14 @@ Date: 2017-2-27 */
 #menu{
 	/* margin: 10px; */
 	position: fixed;
-	width:200px;
+	width:320px;
 	top: 70px;
 	right: 20px;
 	z-index:3;
 
 	color: rgb(150, 150, 150);
 	font-family: "helvetica";
-	font-size: 15pt;
+	/* font-size: 20pt; */
 	font-weight: bold;
 	
 }
@@ -112,6 +112,8 @@ overflow: visible;
 	flex-direction: column;
 	opacity: 1;
 	box-sizing: border-box;
+
+	align-items: center
 }
 /* Project body (article content below gallery) */
 #project_body:empty {
@@ -196,7 +198,7 @@ a:active {
 	display: block;
 	color: rgb(150, 150, 150);
 	font-family: "helvetica";
-	font-size: 15pt;
+	font-size: 23pt;
 	font-weight: bold;
 	text-align: center;
 }
@@ -221,6 +223,7 @@ a:active {
 
 /* ---- Gallery Page ---- */
 #gallery_page {
+	width:100%;
 	padding: 20px 0;
 }
 .gallery_heading {
@@ -258,6 +261,22 @@ a:active {
 	font-size: 8pt;
 }
 
+/* --- Medium Size --- */
+@media screen and (max-width: 1250px) {
+    #ARTIST_NAME {
+		width:250px;
+		font-size: 18pt;
+		padding:0px 0px;
+    }
+    #menu {
+		width:250px;
+    }
+	#site_nav {
+		font-size: 18pt;
+	}
+}
+
+
 /* ---- Mobile Responsive ---- */
 /* Mobile index page: menu at bottom */
 
@@ -272,6 +291,9 @@ a:active {
 		margin: 20px 0 10px 0;
 		box-sizing: border-box;
 	}
+	/* #site_nav {
+		font-size: 18pt;
+	} */
 	.page-index #menu {
 		position: fixed;
 		bottom: 50px;
@@ -283,13 +305,14 @@ a:active {
 	#ARTIST_NAME {
 		position: relative;
 		width: 100%;
-		max-width: 200px;
+		max-width: 280px;
 		top: auto;
 		left: auto;
 		bottom: auto;
 		text-align: center;
 		padding: 10px 0;
 		margin: 10px auto 0 auto;
+		/* font-size: 18pt; */
 	}
 	/* Special handling of index page*/ 
 	.page-index #site_nav {
@@ -304,7 +327,7 @@ a:active {
 			width: auto;
 			max-width: none;
 			white-space: nowrap;
-			font-size: 20pt;
+			/* font-size: 30pt; */
 			text-align: center;
 	}
 	/* Content: full width, no left offset */
