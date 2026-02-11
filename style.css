@@ -1,119 +1,117 @@
 /* Style sheet for
-Site: diegoapv.com 
-Author: Diego Plascencia-Vega 
+Site: diegoapv.com
+Author: Diego Plascencia-Vega
 Date: 2017-2-27 */
 
+:root {
+	--color-text: rgb(150, 150, 150);
+	--color-heading: rgb(120, 120, 120);
+	--color-text-light: rgb(180, 180, 180);
+	--color-hover: rgb(37, 72, 95);
+	--color-index: rgb(161, 154, 146);
+	--font-main: "helvetica";
+}
+
 /* artist name link */
-#ARTIST_NAME{
+#ARTIST_NAME {
 	position: fixed;
-	width:300px;
+	width: 300px;
 	height: 50px;
-	left:25px;
+	left: 25px;
 	bottom: 25px;
 
-	padding:20px 10px;
-	margin: 0px;
-	z-index:3;
+	padding: 20px 10px;
+	margin: 0;
+	z-index: 3;
 
 	outline: none;
-	color: rgb(120, 120, 120);
+	color: var(--color-heading);
 	text-align: left;
-	font-family: "helvetica";
+	font-family: var(--font-main);
 	font-weight: bold;
 	font-size: 23pt;
 }
-/* background element (html for now) behind all other elements*/
-#back{
+/* background element (html for now) behind all other elements */
+#back {
 	position: absolute;
-	top: 0px;
-	left: 0px;
-	right:0px;
-	bottom:0px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 
-	padding:0px 0px 0px 0px;
-	margin: 0px;
-	border: 0px;
+	padding: 0;
+	margin: 0;
+	border: 0;
 
-	text-align:left;
+	text-align: left;
 }
 /* menu containing list of groups of artworks */
-#menu{
-	/* margin: 10px; */
+#menu {
 	position: fixed;
-	width:320px;
+	width: 320px;
 	top: 70px;
 	right: 20px;
-	z-index:3;
+	z-index: 3;
 
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
-	/* font-size: 20pt; */
+	color: var(--color-text);
+	font-family: var(--font-main);
 	font-weight: bold;
-	
 }
 /* element containing about info */
-#about{
+#about {
 	position: absolute;
-	top:0px;
-	left:100px;
-
-	padding:50px;
+	top: 0;
+	left: 100px;
+	padding: 50px;
 }
-#about ul{
-	list-style-type: "";
+#about ul {
+	list-style-type: none;
 }
-#portrait{
-
-	width:300px;
-	height:300px;
+#portrait {
+	width: 300px;
+	height: 300px;
 }
-#about_me{
-	position:absolute;
-	top:150px;
-	left:375px;
-	width:400px;
+#about_me {
+	position: absolute;
+	top: 150px;
+	left: 375px;
+	width: 400px;
 }
-#education_work{
-	width:600px;
+#education_work {
+	width: 600px;
 }
-/* element containing galleria jquery*/
-#galleria{
+/* element containing galleria jquery */
+#galleria {
 	position: relative;
-	height:535px;
-	width:730px;
-	top: auto;
-	left: auto;
+	height: 535px;
+	width: 730px;
 	margin-left: 5%;
 }
 /* galleria jquery formatting */
 .galleria-theme-classic {
-overflow: visible;
+	overflow: visible;
 }
 .galleria-theme-classic .galleria-info-description {
-    color: rgb(150, 150, 150);
-    font-family: "helvetica";
-    font-size:12px;
+	color: var(--color-text);
+	font-family: var(--font-main);
+	font-size: 12px;
 }
 /* Content containing Images, Captions, and Text */
-#content{
+#content {
 	position: relative;
 	width: 80%;
 	height: auto;
-	left: auto;
-	top: auto;
 	margin: 80px 0 0 15%;
 
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
+	color: var(--color-text);
+	font-family: var(--font-main);
 	font-size: 10pt;
-	z-index:1;
+	z-index: 1;
 
 	display: flex;
 	flex-direction: column;
-	opacity: 1;
 	box-sizing: border-box;
-
-	align-items: center
+	align-items: center;
 }
 /* Project body (article content below gallery) */
 #project_body:empty {
@@ -121,19 +119,17 @@ overflow: visible;
 }
 #project_body {
 	position: relative;
-	top: auto;
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
+	color: var(--color-text);
+	font-family: var(--font-main);
 	font-size: 10pt;
 	line-height: 1.6;
 	max-width: 730px;
-	left: auto;
 	margin-left: 5%;
 	margin-top: 45px;
 	padding-bottom: 40px;
 }
 #project_body h1, #project_body h2, #project_body h3 {
-	color: rgb(120, 120, 120);
+	color: var(--color-heading);
 }
 #project_body code {
 	background: rgba(150, 150, 150, 0.1);
@@ -153,33 +149,21 @@ overflow: visible;
 	height: auto;
 }
 /* Table containing Group Exhibits */
-#content table{
-	color: rgb(150, 150, 150);
-    font-family: "helvetica";
-    font-size: 10pt;
-    border-spacing: 2em 0em;
+#content table {
+	color: var(--color-text);
+	font-family: var(--font-main);
+	font-size: 10pt;
+	border-spacing: 2em 0;
 }
-/* unvisited link */
-a:link {
- 	color: inherit;
-    text-decoration: none;
-}
-/* visited link */
-a:visited {
- 	color: inherit;
-    text-decoration: none;
-}
-/* mouse over link */
-a:hover {
-	color: rgb(37, 72, 95);
+/* Link styles */
+a:link, a:visited, a:active {
+	color: inherit;
 	text-decoration: none;
 }
-/* selected link */
-a:active {
- 	color: inherit;
-    text-decoration: none;
+a:hover {
+	color: var(--color-hover);
 }
-#file_link{
+#file_link {
 	text-decoration: underline;
 }
 
@@ -195,9 +179,8 @@ a:active {
 
 /* Site navigation links */
 #site_nav {
-	display: block;
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
+	color: var(--color-text);
+	font-family: var(--font-main);
 	font-size: 23pt;
 	font-weight: bold;
 	text-align: center;
@@ -210,25 +193,21 @@ a:active {
 /* ---- Index Page Color Overrides ---- */
 .page-index #ARTIST_NAME,
 .page-index #ARTIST_NAME a {
-		color: rgb(161, 154, 146);
-	/* color: rgb(230, 227, 222); Warm gray */
-	/* color: rgb(226, 231, 238); Cool gray */
+	color: var(--color-index);
 }
 .page-index #site_nav,
 .page-index #site_nav a {
-	/* color: rgb(150, 150, 150); */
-	/* color: rgb(154, 163, 173); */
-	color: rgb(161, 154, 146);
+	color: var(--color-index);
 }
 
 /* ---- Gallery Page ---- */
 #gallery_page {
-	width:100%;
+	width: 100%;
 	padding: 20px 0;
 }
 .gallery_heading {
-	color: rgb(120, 120, 120);
-	font-family: "helvetica";
+	color: var(--color-heading);
+	font-family: var(--font-main);
 	font-weight: bold;
 	font-size: 14pt;
 	margin-bottom: 20px;
@@ -250,27 +229,27 @@ a:active {
 	object-fit: cover;
 }
 .gallery_item .gallery_item_title {
-	color: rgb(150, 150, 150);
-	font-family: "helvetica";
+	color: var(--color-text);
+	font-family: var(--font-main);
 	font-size: 9pt;
 	margin-top: 5px;
 }
 .gallery_item .gallery_item_date {
-	color: rgb(180, 180, 180);
-	font-family: "helvetica";
+	color: var(--color-text-light);
+	font-family: var(--font-main);
 	font-size: 8pt;
 }
 
 /* --- Medium Size --- */
 @media screen and (max-width: 1250px) {
-    #ARTIST_NAME {
-		width:250px;
+	#ARTIST_NAME {
+		width: 250px;
 		font-size: 18pt;
-		padding:0px 0px;
-    }
-    #menu {
-		width:250px;
-    }
+		padding: 0;
+	}
+	#menu {
+		width: 250px;
+	}
 	#site_nav {
 		font-size: 18pt;
 	}
@@ -278,8 +257,6 @@ a:active {
 
 
 /* ---- Mobile Responsive ---- */
-/* Mobile index page: menu at bottom */
-
 @media screen and (max-width: 768px) {
 	/* Menu: switch from fixed sidebar to top of page */
 	#menu {
@@ -291,9 +268,6 @@ a:active {
 		margin: 20px 0 10px 0;
 		box-sizing: border-box;
 	}
-	/* #site_nav {
-		font-size: 18pt;
-	} */
 	.page-index #menu {
 		position: fixed;
 		bottom: 50px;
@@ -312,23 +286,21 @@ a:active {
 		text-align: center;
 		padding: 10px 0;
 		margin: 10px auto 0 auto;
-		/* font-size: 18pt; */
 	}
-	/* Special handling of index page*/ 
+	/* Special handling of index page */
 	.page-index #site_nav {
 		font-size: 20pt;
 	}
 	.page-index #ARTIST_NAME {
-			position: fixed;
-			left: 0px;
-			right: 0px;
-			top: 30px;
-			bottom: auto;
-			width: auto;
-			max-width: none;
-			white-space: nowrap;
-			/* font-size: 30pt; */
-			text-align: center;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 30px;
+		bottom: auto;
+		width: auto;
+		max-width: none;
+		white-space: nowrap;
+		text-align: center;
 	}
 	/* Content: full width, no left offset */
 	#content {
@@ -336,7 +308,6 @@ a:active {
 		margin: 0;
 		padding: 10px;
 	}
-
 	/* Galleria: responsive width and height */
 	#galleria {
 		width: 100%;
@@ -361,19 +332,16 @@ a:active {
 		top: auto;
 		padding: 10px;
 	}
-
 	#portrait {
 		width: 200px;
 		height: 200px;
 		margin: 0 auto;
 		display: block;
 	}
-
 	#portrait img {
 		width: 100%;
 		height: auto;
 	}
-
 	#about_me {
 		position: relative;
 		top: auto;
@@ -381,11 +349,9 @@ a:active {
 		width: 100%;
 		padding: 10px 0;
 	}
-
 	#education_work {
 		width: 100%;
 	}
-
 	#project_body {
 		max-width: 100%;
 		margin-left: 0;
@@ -395,7 +361,6 @@ a:active {
 		padding-left: 20px;
 		box-sizing: border-box;
 	}
-
 	/* Table: allow wrapping on small screens */
 	#content table {
 		display: table;
@@ -405,7 +370,6 @@ a:active {
 		-webkit-text-size-adjust: 100%;
 		text-size-adjust: 100%;
 	}
-
 	/* Gallery grid: 2 columns on mobile */
 	.gallery_grid {
 		grid-template-columns: repeat(2, 1fr);
